@@ -15,6 +15,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useLanguage } from "@/components/language-provider";
+import {
+  Reveal,
+  StaggerGroup,
+  StaggerItem,
+} from "@/components/ui/motion-primitives";
 
 export function QualityExportSection() {
   const { t } = useLanguage();
@@ -35,7 +40,7 @@ export function QualityExportSection() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl">
+        <Reveal className="max-w-3xl">
           <Badge variant="dark-amber" className="mb-4">
             <ShieldCheck className="size-3.5" aria-hidden="true" />
             {t.quality.eyebrow}
@@ -46,37 +51,38 @@ export function QualityExportSection() {
           <p className="mt-4 text-lg leading-relaxed text-slate-300">
             {t.quality.subtitle}
           </p>
-        </div>
+        </Reveal>
 
         {/* 4-Stage QA/QC Stepper Pipeline */}
         <div className="mt-12">
           <p className="font-mono text-xs font-semibold tracking-[0.14em] text-[#FB9704] uppercase">
             {t.quality.pipelineTitle}
           </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <StaggerGroup
+            stagger={0.09}
+            className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          >
             {t.quality.stages.map((stage) => (
-              <div
-                key={stage.code}
-                className="flex flex-col rounded-2xl border border-white/12 bg-white/[0.04] p-6 transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.06]"
-              >
-                <span className="inline-flex w-fit rounded-md border border-[#FB9704]/30 bg-[#FB9704]/10 px-2.5 py-1 font-mono text-xs font-semibold text-[#FB9704]">
-                  {stage.code}
-                </span>
-                <h3 className="mt-4 font-heading text-lg font-semibold text-white">
-                  {stage.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300">
-                  {stage.description}
-                </p>
-              </div>
+              <StaggerItem key={stage.code} className="flex">
+                <div className="flex flex-1 flex-col rounded-2xl border border-white/12 bg-white/[0.04] p-6 transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.06]">
+                  <span className="inline-flex w-fit rounded-md border border-[#FB9704]/30 bg-[#FB9704]/10 px-2.5 py-1 font-mono text-xs font-semibold text-[#FB9704]">
+                    {stage.code}
+                  </span>
+                  <h3 className="mt-4 font-heading text-lg font-semibold text-white">
+                    {stage.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                    {stage.description}
+                  </p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
 
         {/* Standards + Export Reach Split */}
         <div className="mt-12 grid gap-8 lg:grid-cols-12">
-          {/* Left: Compliance & Governance Grid (7 cols) */}
-          <div className="rounded-2xl border border-white/12 bg-[#0B1222]/90 p-6 sm:p-8 lg:col-span-7">
+          <Reveal className="rounded-2xl border border-white/12 bg-[#0B1222]/90 p-6 sm:p-8 lg:col-span-7">
             <div className="flex items-center gap-2.5">
               <Award className="size-5 text-[#FB9704]" aria-hidden="true" />
               <h3 className="font-heading text-xl font-semibold text-white">
@@ -84,9 +90,9 @@ export function QualityExportSection() {
               </h3>
             </div>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              {t.quality.standards.map((std) => (
+              {t.quality.standards.map((std, idx) => (
                 <div
-                  key={std.code}
+                  key={idx}
                   className="rounded-xl border border-white/10 bg-white/[0.03] p-4"
                 >
                   <div className="flex items-center gap-2">
@@ -108,7 +114,6 @@ export function QualityExportSection() {
               ))}
             </div>
 
-            {/* HSE & Cross-Cultural Collaboration Callout */}
             <div className="mt-6 flex items-start gap-3.5 rounded-xl border border-[#FB9704]/25 bg-[#FB9704]/8 p-4">
               <HardHat
                 className="mt-0.5 size-5 shrink-0 text-[#FB9704]"
@@ -123,10 +128,9 @@ export function QualityExportSection() {
                 </p>
               </div>
             </div>
-          </div>
+          </Reveal>
 
-          {/* Right: Export Reach + FAQ Accordion (5 cols) */}
-          <div className="flex flex-col gap-6 lg:col-span-5">
+          <Reveal delay={0.1} className="flex flex-col gap-6 lg:col-span-5">
             <div className="rounded-2xl border border-white/12 bg-[#0B1222]/90 p-6 sm:p-7">
               <div className="flex items-center gap-2.5">
                 <Globe2 className="size-5 text-[#FB9704]" aria-hidden="true" />
@@ -135,9 +139,9 @@ export function QualityExportSection() {
                 </h3>
               </div>
               <div className="mt-5 space-y-3.5">
-                {t.quality.exportRegions.map((item) => (
+                {t.quality.exportRegions.map((item, idx) => (
                   <div
-                    key={item.region}
+                    key={idx}
                     className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5"
                   >
                     <div className="flex items-center justify-between gap-2">
@@ -156,7 +160,6 @@ export function QualityExportSection() {
               </div>
             </div>
 
-            {/* FAQ Accordion */}
             <div className="rounded-2xl border border-white/12 bg-[#0B1222]/90 p-6 sm:p-7">
               <h3 className="font-heading text-base font-semibold text-white">
                 {t.quality.faqTitle}
@@ -178,7 +181,7 @@ export function QualityExportSection() {
                 ))}
               </Accordion>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

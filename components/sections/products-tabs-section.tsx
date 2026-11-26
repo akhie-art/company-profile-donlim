@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowRight,
   CheckCircle2,
@@ -23,6 +24,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useLanguage } from "@/components/language-provider";
+import { INDUSTRIAL_EASE, Reveal } from "@/components/ui/motion-primitives";
 import type {
   ProductCatalogItem,
   ProductFilterCategory,
@@ -80,7 +82,7 @@ export function ProductsTabsSection({
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Centered Editorial Header (Wavin /id/c style) */}
-        <div className="mx-auto max-w-2xl text-left md:text-center">
+        <Reveal className="mx-auto max-w-2xl text-left md:text-center">
           <Badge variant="brand" className="mb-4">
             {t.products.eyebrow}
           </Badge>
@@ -90,10 +92,10 @@ export function ProductsTabsSection({
           <p className="mt-5 text-base leading-relaxed text-slate-600 sm:text-lg">
             {t.products.subtitle}
           </p>
-        </div>
+        </Reveal>
 
-        {/* Horizontal Centered Square Icon Category Filter Tiles (Wavin /id/c signature) */}
-        <div className="mt-10 md:mt-14">
+        {/* Horizontal Centered Square Icon Category Filter Tiles */}
+        <Reveal delay={0.08} className="mt-10 md:mt-14">
           <div
             role="tablist"
             aria-label={t.products.title}
@@ -110,32 +112,40 @@ export function ProductsTabsSection({
                   aria-selected={isActive}
                   onClick={() => setActiveCategory(category.id)}
                   className={cn(
-                    "flex h-[116px] w-[156px] shrink-0 cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border p-3 text-center transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0547D4] md:h-[138px] md:w-[178px]",
+                    "relative flex h-[116px] w-[156px] shrink-0 cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border p-3 text-center transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0547D4] md:h-[138px] md:w-[178px]",
                     isActive
-                      ? "border-[#0547D4] bg-[#EFF6FF] text-[#0547D4] ring-1 ring-[#0547D4]"
+                      ? "border-[#0547D4] text-[#0547D4]"
                       : "border-slate-200 bg-white text-slate-700 hover:border-[#0547D4] hover:text-[#020617]"
                   )}
                 >
+                  {isActive && (
+                    <motion.span
+                      layoutId="product-category-tile-bg"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 34,
+                      }}
+                      className="absolute inset-0 rounded-lg bg-[#EFF6FF] ring-1 ring-[#0547D4]"
+                    />
+                  )}
                   <Icon
-                    className={cn(
-                      "size-8 shrink-0 stroke-[1.6]",
-                      isActive ? "text-[#0547D4]" : "text-[#0547D4]"
-                    )}
+                    className="relative z-10 size-8 shrink-0 stroke-[1.6] text-[#0547D4]"
                     aria-hidden="true"
                   />
-                  <span className="font-heading text-sm font-medium leading-tight">
+                  <span className="relative z-10 font-heading text-sm font-medium leading-tight">
                     {category.label}
                   </span>
                 </button>
               );
             })}
           </div>
-        </div>
+        </Reveal>
 
-        {/* Hairline Divider + 4-Column Product Card Grid (Wavin /id/c exact card anatomy) */}
+        {/* Hairline Divider + Animated 4-Column Product Card Grid */}
         <div className="mt-10 border-t border-slate-200 pt-8 md:mt-12 md:pt-12">
           <div className="mb-6 flex items-center justify-between">
-            <p className="font-mono text-xs font-medium text-slate-500 uppercase tracking-wider">
+            <p className="font-mono text-xs font-medium tracking-wider text-slate-500 uppercase">
               <span className="font-semibold text-[#0F172A] tabular-nums">
                 {filteredItems.length}
               </span>{" "}
@@ -143,54 +153,62 @@ export function ProductsTabsSection({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 md:gap-6">
-            {filteredItems.map((product) => (
-              <article
-                key={product.id}
-                className="group flex flex-col overflow-hidden rounded-[16px] border border-slate-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md"
-              >
-                <button
-                  type="button"
-                  onClick={() => setSelectedProductId(product.id)}
-                  className="flex flex-1 cursor-pointer flex-col text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0547D4]"
+          <motion.div
+            layout
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 md:gap-6"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredItems.map((product) => (
+                <motion.article
+                  key={product.id}
+                  layout
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.32, ease: INDUSTRIAL_EASE }}
+                  className="group flex flex-col overflow-hidden rounded-[16px] border border-slate-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md"
                 >
-                  {/* Card Content: horizontal compact on mobile (96x96 thumb), vertical square card on md+ */}
-                  <div className="flex flex-1 gap-4 p-4 md:flex-col md:gap-5">
-                    <div className="relative h-[96px] w-[96px] shrink-0 overflow-hidden rounded-[8px] border border-slate-950/10 bg-[#F1F5F9] md:aspect-square md:h-auto md:w-full md:rounded-[12px]">
-                      <Image
-                        src={product.image}
-                        alt={product.imageAlt}
-                        fill
-                        sizes="(max-width: 768px) 96px, (max-width: 1024px) 45vw, 24vw"
-                        className={cn(
-                          "object-cover transition-opacity duration-200 group-hover:opacity-95",
-                          product.imagePosition ?? "object-center"
-                        )}
+                  <button
+                    type="button"
+                    onClick={() => setSelectedProductId(product.id)}
+                    className="flex flex-1 cursor-pointer flex-col text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0547D4]"
+                  >
+                    <div className="flex flex-1 gap-4 p-4 md:flex-col md:gap-5">
+                      <div className="relative h-[96px] w-[96px] shrink-0 overflow-hidden rounded-[8px] border border-slate-950/10 bg-[#F1F5F9] md:aspect-square md:h-auto md:w-full md:rounded-[12px]">
+                        <Image
+                          src={product.image}
+                          alt={product.imageAlt}
+                          fill
+                          sizes="(max-width: 768px) 96px, (max-width: 1024px) 45vw, 24vw"
+                          className={cn(
+                            "object-cover transition-opacity duration-200 group-hover:opacity-95",
+                            product.imagePosition ?? "object-center"
+                          )}
+                        />
+                      </div>
+
+                      <div className="flex flex-1 flex-col justify-center md:justify-start md:px-1">
+                        <span className="text-xs font-medium text-slate-500">
+                          {product.subcategory}
+                        </span>
+                        <h3 className="mt-1.5 font-heading text-base font-semibold leading-snug text-[#020617] transition-colors duration-200 group-hover:text-[#0547D4] md:text-lg">
+                          {product.name}
+                        </h3>
+                      </div>
+                    </div>
+
+                    <div className="flex w-full items-center justify-between rounded-b-[16px] bg-[#EFF6FF] px-5 py-3.5 text-sm font-semibold text-[#0547D4] transition-colors duration-200 group-hover:bg-[#DBEAFE]">
+                      <span>{t.products.viewProductLabel}</span>
+                      <ArrowRight
+                        className="size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
+                        aria-hidden="true"
                       />
                     </div>
-
-                    <div className="flex flex-1 flex-col justify-center md:justify-start md:px-1">
-                      <span className="text-xs font-medium text-slate-500">
-                        {product.subcategory}
-                      </span>
-                      <h3 className="mt-1.5 font-heading text-base font-semibold leading-snug text-[#020617] transition-colors duration-200 group-hover:text-[#0547D4] md:text-lg">
-                        {product.name}
-                      </h3>
-                    </div>
-                  </div>
-
-                  {/* Signature Wavin Tinted Bottom Action Bar */}
-                  <div className="flex w-full items-center justify-between rounded-b-[16px] bg-[#EFF6FF] px-5 py-3.5 text-sm font-semibold text-[#0547D4] transition-colors duration-200 group-hover:bg-[#DBEAFE]">
-                    <span>{t.products.viewProductLabel}</span>
-                    <ArrowRight
-                      className="size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
-                      aria-hidden="true"
-                    />
-                  </div>
-                </button>
-              </article>
-            ))}
-          </div>
+                  </button>
+                </motion.article>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
 
@@ -237,7 +255,6 @@ export function ProductsTabsSection({
                   {selectedProduct.summary}
                 </p>
 
-                {/* Production Scope */}
                 <div>
                   <h4 className="font-mono text-xs font-semibold tracking-wider text-slate-500 uppercase">
                     {t.products.modelsHeading}
@@ -258,7 +275,6 @@ export function ProductsTabsSection({
                   </ul>
                 </div>
 
-                {/* Technical Specs Grid */}
                 <div>
                   <h4 className="font-mono text-xs font-semibold tracking-wider text-slate-500 uppercase">
                     {t.products.specsHeading}
@@ -280,7 +296,6 @@ export function ProductsTabsSection({
                   </dl>
                 </div>
 
-                {/* Export Markets */}
                 <div>
                   <p className="flex items-center gap-1.5 font-mono text-xs font-semibold tracking-wider text-slate-500 uppercase">
                     <Globe2

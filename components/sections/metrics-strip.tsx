@@ -2,9 +2,13 @@
 
 import { Factory, Globe2, MapPin, Users } from "lucide-react";
 import { useLanguage } from "@/components/language-provider";
+import { StaggerGroup, StaggerItem } from "@/components/ui/motion-primitives";
 import type { MetricItem } from "@/lib/company-data";
 
-const metricIconMap: Record<MetricItem["icon"], React.ComponentType<{ className?: string }>> = {
+const metricIconMap: Record<
+  MetricItem["icon"],
+  React.ComponentType<{ className?: string }>
+> = {
   users: Users,
   factory: Factory,
   globe: Globe2,
@@ -21,17 +25,24 @@ export function MetricsStrip() {
       className="border-b border-slate-200 bg-white"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 divide-y divide-slate-200 sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x">
+        <StaggerGroup
+          stagger={0.08}
+          className="grid grid-cols-1 divide-y divide-slate-200 sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x"
+        >
           {t.metrics.map((metric, idx) => {
             const Icon = metricIconMap[metric.icon];
             return (
-              <div
-                key={metric.label}
+              <StaggerItem
+                key={metric.icon}
                 className={`flex flex-col gap-3 py-8 sm:px-6 lg:py-10 ${
                   idx % 2 === 1 ? "sm:border-l sm:border-slate-200" : ""
-                } ${idx >= 2 ? "sm:border-t sm:border-slate-200 lg:border-t-0" : ""} ${
-                  idx === 0 ? "lg:pl-0" : ""
-                } ${idx === t.metrics.length - 1 ? "lg:pr-0" : ""}`}
+                } ${
+                  idx >= 2
+                    ? "sm:border-t sm:border-slate-200 lg:border-t-0"
+                    : ""
+                } ${idx === 0 ? "lg:pl-0" : ""} ${
+                  idx === t.metrics.length - 1 ? "lg:pr-0" : ""
+                }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex size-10 items-center justify-center rounded-xl bg-[#EFF6FF] text-[#0547D4]">
@@ -52,10 +63,10 @@ export function MetricsStrip() {
                     {metric.detail}
                   </p>
                 </div>
-              </div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerGroup>
       </div>
     </section>
   );

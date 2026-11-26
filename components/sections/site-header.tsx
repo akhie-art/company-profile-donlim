@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 import { ArrowUpRight, Globe, Menu } from "lucide-react";
 import { cn } from "cn";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -14,6 +15,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useLanguage } from "@/components/language-provider";
+import { INDUSTRIAL_EASE } from "@/components/ui/motion-primitives";
 
 export function SiteHeader() {
   const { locale, setLocale, t } = useLanguage();
@@ -28,7 +30,12 @@ export function SiteHeader() {
         {t.skipToContent}
       </a>
 
-      <header className="fixed top-4 inset-x-4 z-50">
+      <motion.header
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: INDUSTRIAL_EASE }}
+        className="fixed top-4 inset-x-4 z-50"
+      >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 rounded-2xl border border-slate-200/90 bg-white/90 px-4 shadow-sm backdrop-blur-md sm:px-6">
           {/* Official Donlim Logo */}
           <a
@@ -65,39 +72,46 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          {/* Right Actions: Language Toggle (ID / 中文) + CTA + Mobile Menu */}
+          {/* Right Actions: Animated Language Toggle (ID / 中文) + CTA + Mobile Menu */}
           <div className="flex items-center gap-2 sm:gap-3">
             <div
               role="group"
               aria-label={t.nav.languageLabel}
               className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 p-0.5"
             >
-              <button
-                type="button"
-                onClick={() => setLocale("id")}
-                aria-pressed={locale === "id"}
-                className={cn(
-                  "cursor-pointer rounded-md px-2.5 py-1 font-mono text-xs font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0547D4]",
-                  locale === "id"
-                    ? "bg-[#0F172A] text-white"
-                    : "text-slate-600 hover:text-[#0F172A]"
-                )}
-              >
-                ID
-              </button>
-              <button
-                type="button"
-                onClick={() => setLocale("zh")}
-                aria-pressed={locale === "zh"}
-                className={cn(
-                  "cursor-pointer rounded-md px-2.5 py-1 text-xs font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0547D4]",
-                  locale === "zh"
-                    ? "bg-[#0F172A] text-white"
-                    : "text-slate-600 hover:text-[#0F172A]"
-                )}
-              >
-                中文
-              </button>
+              {(["id", "zh"] as const).map((code) => {
+                const isActive = locale === code;
+                return (
+                  <button
+                    key={code}
+                    type="button"
+                    onClick={() => setLocale(code)}
+                    aria-pressed={isActive}
+                    className={cn(
+                      "relative cursor-pointer rounded-md px-2.5 py-1 text-xs font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0547D4]",
+                      code === "id" ? "font-mono" : "",
+                      isActive
+                        ? "text-white"
+                        : "text-slate-600 hover:text-[#0F172A]"
+                    )}
+                  >
+                    {isActive && (
+                      <motion.span
+                        layoutId="lang-switcher-pill"
+                        transition={{
+                          type: "spring",
+                          stiffness: 420,
+                          damping: 34,
+                        }}
+                        className="absolute inset-0 rounded-md bg-[#0F172A]"
+                      />
+                    )}
+                    <span className="relative z-10">
+                      {code === "id" ? "ID" : "中文"}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
             <a
@@ -188,7 +202,7 @@ export function SiteHeader() {
             </div>
           </div>
         </div>
-      </header>
+      </motion.header>
     </>
   );
 }

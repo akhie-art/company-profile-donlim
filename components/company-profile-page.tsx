@@ -2,6 +2,10 @@
 
 import * as React from "react";
 import { LanguageProvider } from "@/components/language-provider";
+import {
+  MotionProvider,
+  ScrollProgressBar,
+} from "@/components/ui/motion-primitives";
 import { SiteHeader } from "@/components/sections/site-header";
 import { HeroSection } from "@/components/sections/hero-section";
 import { MetricsStrip } from "@/components/sections/metrics-strip";
@@ -18,25 +22,28 @@ export function CompanyProfilePage() {
   const [selectedTopic, setSelectedTopic] = React.useState("b2b-oem");
 
   return (
-    <LanguageProvider>
-      <div className="flex min-h-screen flex-col">
-        <SiteHeader />
-        <main id="main-content" className="flex-1">
-          <HeroSection />
-          <MetricsStrip />
-          <AboutSection />
-          <SolutionsSection onSelectInquiryTopic={setSelectedTopic} />
-          <CapabilitiesBento />
-          <ProductsTabsSection onSelectInquiryTopic={setSelectedTopic} />
-          <QualityExportSection />
-          <GatewayPathsSection onSelectInquiryTopic={setSelectedTopic} />
-          <ContactSection
-            selectedTopic={selectedTopic}
-            onTopicChange={setSelectedTopic}
-          />
-        </main>
-        <SiteFooter />
-      </div>
-    </LanguageProvider>
+    <MotionProvider>
+      <LanguageProvider>
+        <div className="flex min-h-screen flex-col">
+          <ScrollProgressBar />
+          <SiteHeader />
+          <main id="main-content" className="flex-1">
+            <HeroSection />
+            <MetricsStrip />
+            <AboutSection />
+            <SolutionsSection onSelectInquiryTopic={setSelectedTopic} />
+            <CapabilitiesBento />
+            <ProductsTabsSection onSelectInquiryTopic={setSelectedTopic} />
+            <QualityExportSection />
+            <GatewayPathsSection onSelectInquiryTopic={setSelectedTopic} />
+            <ContactSection
+              selectedTopic={selectedTopic}
+              onTopicChange={setSelectedTopic}
+            />
+          </main>
+          <SiteFooter />
+        </div>
+      </LanguageProvider>
+    </MotionProvider>
   );
 }
