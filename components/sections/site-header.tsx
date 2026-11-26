@@ -3,11 +3,18 @@
 import * as React from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { ArrowUpRight, Globe, Menu } from "lucide-react";
+import {
+  ArrowUpRight,
+  ChevronRight,
+  MapPin,
+  Menu,
+  X,
+} from "lucide-react";
 import { cn } from "cn";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -49,7 +56,7 @@ export function SiteHeader() {
               width={118}
               height={38}
               priority
-              className="h-8 w-auto sm:h-9"
+              className="h-8 w-auto shrink-0 object-contain sm:h-9"
             />
             <span className="hidden border-l border-slate-200 pl-3 font-mono text-[11px] font-medium tracking-wider text-slate-600 uppercase xl:inline-block">
               {locale === "zh" ? "印尼制造基地" : "Indonesia"}
@@ -139,58 +146,125 @@ export function SiteHeader() {
                 >
                   <Menu className="size-5" aria-hidden="true" />
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[300px] sm:w-[340px]">
-                  <SheetHeader className="border-b border-slate-200 pb-4">
-                    <Image
-                      src="/image/donlim.svg"
-                      alt="PT Donlim Technology Indonesia"
-                      width={110}
-                      height={35}
-                      className="h-8 w-auto"
-                    />
-                    <SheetTitle className="mt-2 text-left text-sm font-semibold text-[#0F172A]">
-                      {t.nav.mobileTitle}
-                    </SheetTitle>
-                    <SheetDescription className="text-left text-xs text-slate-600">
-                      {t.nav.mobileSubtitle}
-                    </SheetDescription>
+                <SheetContent
+                  side="right"
+                  showCloseButton={false}
+                  className="flex w-[86vw] max-w-[340px] flex-col gap-0 bg-white p-0"
+                >
+                  {/* Clean Brand + Close Top Bar (zero overlap, locked aspect ratio) */}
+                  <SheetHeader className="border-b border-slate-200 bg-[#F8FAFC] px-5 pt-5 pb-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <a
+                        href="#hero"
+                        onClick={() => setMobileOpen(false)}
+                        className="inline-flex shrink-0 items-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0547D4]"
+                      >
+                        <Image
+                          src="/image/donlim.svg"
+                          alt="PT Donlim Technology Indonesia"
+                          width={100}
+                          height={32}
+                          className="h-7 w-auto shrink-0 object-contain"
+                        />
+                      </a>
+                      <SheetClose
+                        render={
+                          <Button
+                            variant="outline"
+                            size="icon-sm"
+                            aria-label={locale === "zh" ? "关闭菜单" : "Tutup menu"}
+                            className="shrink-0 rounded-lg border-slate-200 bg-white text-slate-600 hover:bg-slate-100 hover:text-[#0F172A]"
+                          />
+                        }
+                      >
+                        <X className="size-4" aria-hidden="true" />
+                      </SheetClose>
+                    </div>
+                    <div className="pt-3 text-left">
+                      <SheetTitle className="font-heading text-sm font-semibold text-[#020617]">
+                        {t.nav.mobileTitle}
+                      </SheetTitle>
+                      <SheetDescription className="mt-0.5 text-xs text-slate-500">
+                        {t.nav.mobileSubtitle}
+                      </SheetDescription>
+                    </div>
                   </SheetHeader>
 
+                  {/* Structured Numbered Navigation Links */}
                   <nav
                     aria-label={t.nav.mobileSubtitle}
-                    className="flex flex-col gap-1 px-4 py-2"
+                    className="flex-1 overflow-y-auto px-3 py-4"
                   >
-                    {t.nav.items.map((item) => (
-                      <a
-                        key={item.href}
-                        href={item.href}
-                        onClick={() => setMobileOpen(false)}
-                        className="cursor-pointer rounded-lg px-3 py-2.5 font-heading text-base font-medium text-slate-800 transition-colors duration-200 hover:bg-slate-100 hover:text-[#0547D4]"
-                      >
-                        {item.label}
-                      </a>
-                    ))}
+                    <ul className="space-y-1">
+                      {t.nav.items.map((item, idx) => (
+                        <li key={item.href}>
+                          <a
+                            href={item.href}
+                            onClick={() => setMobileOpen(false)}
+                            className="group flex min-h-[48px] cursor-pointer items-center justify-between rounded-xl px-3.5 py-2.5 text-slate-800 transition-colors duration-200 hover:bg-[#EFF6FF] hover:text-[#0547D4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0547D4]"
+                          >
+                            <span className="flex items-center gap-3">
+                              <span className="font-mono text-[11px] font-medium text-slate-400 transition-colors group-hover:text-[#0547D4]">
+                                0{idx + 1}
+                              </span>
+                              <span className="font-heading text-[15px] font-medium">
+                                {item.label}
+                              </span>
+                            </span>
+                            <ChevronRight
+                              className="size-4 text-slate-400 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-[#0547D4]"
+                              aria-hidden="true"
+                            />
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
                   </nav>
 
-                  <div className="mt-auto space-y-3 border-t border-slate-200 p-4">
-                    <div className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-600">
-                      <span className="inline-flex items-center gap-1.5 font-medium">
-                        <Globe
-                          className="size-3.5 text-[#0547D4]"
+                  {/* Bottom Utility & Primary CTA Footer */}
+                  <div className="mt-auto space-y-3 border-t border-slate-200 bg-[#F8FAFC] p-5">
+                    <div className="flex items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5">
+                      <span className="inline-flex items-center gap-2 text-xs font-medium text-slate-700">
+                        <MapPin
+                          className="size-3.5 shrink-0 text-[#0547D4]"
                           aria-hidden="true"
                         />
-                        JIPS Blok G-2, Demak
+                        <span>JIPS Blok G-2, Demak</span>
                       </span>
-                      <span className="font-mono font-semibold text-[#0F172A]">
-                        {locale === "zh" ? "中文" : "ID"}
-                      </span>
+                      <div
+                        role="group"
+                        aria-label={t.nav.languageLabel}
+                        className="inline-flex shrink-0 items-center rounded-md border border-slate-200 bg-slate-50 p-0.5"
+                      >
+                        {(["id", "zh"] as const).map((code) => {
+                          const isActive = locale === code;
+                          return (
+                            <button
+                              key={code}
+                              type="button"
+                              onClick={() => setLocale(code)}
+                              aria-pressed={isActive}
+                              className={cn(
+                                "cursor-pointer rounded px-2 py-0.5 text-[11px] font-semibold transition-colors",
+                                code === "id" ? "font-mono" : "",
+                                isActive
+                                  ? "bg-[#0F172A] text-white"
+                                  : "text-slate-600 hover:text-[#0F172A]"
+                              )}
+                            >
+                              {code === "id" ? "ID" : "中文"}
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
+
                     <a
                       href="#contact"
                       onClick={() => setMobileOpen(false)}
                       className={cn(
                         buttonVariants({ variant: "default", size: "lg" }),
-                        "w-full"
+                        "h-11 w-full rounded-xl"
                       )}
                     >
                       {t.nav.cta}
