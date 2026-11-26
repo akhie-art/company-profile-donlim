@@ -34,7 +34,7 @@ export function SiteHeader() {
           <a
             href="#hero"
             className="flex shrink-0 items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0547D4]"
-            aria-label="PT Donlim Technology Indonesia — Beranda"
+            aria-label="PT Donlim Technology Indonesia"
           >
             <Image
               src="/image/donlim.svg"
@@ -45,13 +45,13 @@ export function SiteHeader() {
               className="h-8 w-auto sm:h-9"
             />
             <span className="hidden border-l border-slate-200 pl-3 font-mono text-[11px] font-medium tracking-wider text-slate-600 uppercase xl:inline-block">
-              Indonesia
+              {locale === "zh" ? "印尼制造基地" : "Indonesia"}
             </span>
           </a>
 
           {/* Desktop Navigation */}
           <nav
-            aria-label="Navigasi Utama"
+            aria-label={t.nav.mobileSubtitle}
             className="hidden items-center gap-1 lg:flex"
           >
             {t.nav.items.map((item) => (
@@ -65,11 +65,11 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          {/* Right Actions: Language Toggle + CTA + Mobile Menu */}
+          {/* Right Actions: Language Toggle (ID / 中文) + CTA + Mobile Menu */}
           <div className="flex items-center gap-2 sm:gap-3">
             <div
               role="group"
-              aria-label="Pilih bahasa"
+              aria-label={t.nav.languageLabel}
               className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 p-0.5"
             >
               <button
@@ -87,16 +87,16 @@ export function SiteHeader() {
               </button>
               <button
                 type="button"
-                onClick={() => setLocale("en")}
-                aria-pressed={locale === "en"}
+                onClick={() => setLocale("zh")}
+                aria-pressed={locale === "zh"}
                 className={cn(
-                  "cursor-pointer rounded-md px-2.5 py-1 font-mono text-xs font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0547D4]",
-                  locale === "en"
+                  "cursor-pointer rounded-md px-2.5 py-1 text-xs font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0547D4]",
+                  locale === "zh"
                     ? "bg-[#0F172A] text-white"
                     : "text-slate-600 hover:text-[#0F172A]"
                 )}
               >
-                EN
+                中文
               </button>
             </div>
 
@@ -119,7 +119,7 @@ export function SiteHeader() {
                     <Button
                       variant="outline"
                       size="icon"
-                      aria-label="Buka menu navigasi"
+                      aria-label={t.nav.openMenuLabel}
                     />
                   }
                 >
@@ -143,7 +143,7 @@ export function SiteHeader() {
                   </SheetHeader>
 
                   <nav
-                    aria-label="Navigasi Mobile"
+                    aria-label={t.nav.mobileSubtitle}
                     className="flex flex-col gap-1 px-4 py-2"
                   >
                     {t.nav.items.map((item) => (
@@ -158,14 +158,17 @@ export function SiteHeader() {
                     ))}
                   </nav>
 
-                  <div className="mt-auto border-t border-slate-200 p-4 space-y-3">
+                  <div className="mt-auto space-y-3 border-t border-slate-200 p-4">
                     <div className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-600">
                       <span className="inline-flex items-center gap-1.5 font-medium">
-                        <Globe className="size-3.5 text-[#0547D4]" aria-hidden="true" />
+                        <Globe
+                          className="size-3.5 text-[#0547D4]"
+                          aria-hidden="true"
+                        />
                         JIPS Blok G-2, Demak
                       </span>
                       <span className="font-mono font-semibold text-[#0F172A]">
-                        {locale.toUpperCase()}
+                        {locale === "zh" ? "中文" : "ID"}
                       </span>
                     </div>
                     <a

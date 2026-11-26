@@ -31,7 +31,7 @@ export function CapabilitiesBento() {
   return (
     <section
       id="capabilities"
-      className="border-y border-slate-200 bg-white py-20 lg:py-28"
+      className="border-y border-slate-200 bg-[#F8FAFC] py-20 lg:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -51,7 +51,7 @@ export function CapabilitiesBento() {
         <div className="mt-12 grid gap-6 lg:grid-cols-12">
           {/* Featured Large Capability Card (Left 6 cols, spans 2 rows on desktop) */}
           {featuredItem && (
-            <article className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[#F8FAFC] transition-colors duration-200 hover:border-slate-300 hover:shadow-md lg:col-span-6 lg:row-span-2">
+            <article className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-colors duration-200 hover:border-slate-300 hover:shadow-md lg:col-span-6 lg:row-span-2">
               {featuredItem.image && (
                 <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-slate-200 bg-slate-100">
                   <Image

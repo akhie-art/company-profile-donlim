@@ -56,7 +56,7 @@ export const metadata: Metadata = {
       "Basis manufaktur strategis Asia Tenggara dari Donlim Group di JIPS Demak, Jawa Tengah — memproduksi peralatan dapur ekspor untuk Amerika Utara & Eropa.",
     type: "website",
     locale: "id_ID",
-    alternateLocale: ["en_US"],
+    alternateLocale: ["zh_CN"],
     siteName: "PT Donlim Technology Indonesia",
     images: [
       {

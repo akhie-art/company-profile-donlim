@@ -1,4 +1,4 @@
-export type Locale = "id" | "en";
+export type Locale = "id" | "zh";
 
 export interface NavItem {
   label: string;
@@ -10,6 +10,20 @@ export interface MetricItem {
   label: string;
   detail: string;
   icon: "users" | "factory" | "globe" | "mapPin";
+}
+
+export interface SolutionItem {
+  id: string;
+  code: string;
+  audience: string;
+  title: string;
+  description: string;
+  outcomes: string[];
+  highlightLabel: string;
+  highlightValue: string;
+  ctaLabel: string;
+  inquiryTopic: string;
+  icon: "layers" | "globe" | "shieldCheck" | "trendingUp";
 }
 
 export interface CapabilityItem {
@@ -83,6 +97,8 @@ export interface CompanyContent {
     cta: string;
     mobileTitle: string;
     mobileSubtitle: string;
+    languageLabel: string;
+    openMenuLabel: string;
   };
   hero: {
     carouselLabel: string;
@@ -109,6 +125,16 @@ export interface CompanyContent {
     milestones: { year: string; title: string; detail: string }[];
     labCaption: string;
     labImageAlt: string;
+  };
+  solutions: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    outcomesHeading: string;
+    bannerTitle: string;
+    bannerSubtitle: string;
+    bannerCta: string;
+    items: SolutionItem[];
   };
   capabilities: {
     eyebrow: string;
@@ -207,14 +233,17 @@ export const companyContent: Record<Locale, CompanyContent> = {
     nav: {
       items: [
         { label: "Tentang", href: "#about" },
+        { label: "Solusi", href: "#solutions" },
         { label: "Kapabilitas", href: "#capabilities" },
         { label: "Produk", href: "#products" },
-        { label: "Kualitas & Ekspor", href: "#quality" },
-        { label: "Kemitraan & Karier", href: "#gateway" },
+        { label: "Kualitas", href: "#quality" },
+        { label: "Kemitraan", href: "#gateway" },
       ],
       cta: "Hubungi Kami",
       mobileTitle: "PT Donlim Technology Indonesia",
       mobileSubtitle: "Navigasi Company Profile",
+      languageLabel: "Pilih bahasa Indonesia atau Mandarin",
+      openMenuLabel: "Buka menu navigasi",
     },
     hero: {
       carouselLabel: "Galeri utama PT Donlim Technology Indonesia",
@@ -278,7 +307,8 @@ export const companyContent: Record<Locale, CompanyContent> = {
     ],
     about: {
       eyebrow: "TENTANG PERUSAHAAN",
-      title: "Menghubungkan Ekosistem Manufaktur Global dengan Keunggulan SDM Indonesia",
+      title:
+        "Menghubungkan Ekosistem Manufaktur Global dengan Keunggulan SDM Indonesia",
       lead: "Didirikan pada tahun 2023 di Demak, Jawa Tengah, PT Donlim Technology Indonesia merupakan basis manufaktur strategis Asia Tenggara dari Guangdong Xinbao Electrical Appliances Holdings Co., Ltd. (Donlim Group).",
       paragraphs: [
         "Kami mengintegrasikan komponen inti berpresisi tinggi dari ekosistem rantai pasok grup — termasuk elemen pemanas dan motor listrik — dengan proses pencetakan injeksi plastik, perakitan massal terstandar, pengujian keselamatan menyeluruh, hingga pengemasan ekspor langsung di fasilitas Jawa Tengah.",
@@ -298,26 +328,116 @@ export const companyContent: Record<Locale, CompanyContent> = {
         {
           year: "1995+",
           title: "Fondasi Donlim / Xinbao",
-          detail: "Membangun reputasi global sebagai pemimpin ODM/OEM peralatan dapur.",
+          detail:
+            "Membangun reputasi global sebagai pemimpin ODM/OEM peralatan dapur.",
         },
         {
           year: "2023",
           title: "Pendirian PT Donlim Technology Indonesia",
-          detail: "Ekspansi strategis ke Jatengland Industrial Park Sayung, Demak.",
+          detail:
+            "Ekspansi strategis ke Jatengland Industrial Park Sayung, Demak.",
         },
         {
           year: "2024–Kini",
           title: "Operasi Skala Besar & Ekspor",
-          detail: "Menyerap 4.000+ tenaga kerja dengan pengiriman rutin ke pasar global.",
+          detail:
+            "Menyerap 4.000+ tenaga kerja dengan pengiriman rutin ke pasar global.",
         },
       ],
-      labCaption: "Inspeksi Keselamatan Elektrik & Validasi Mutu — Lab QA/QC Demak",
+      labCaption:
+        "Inspeksi Keselamatan Elektrik & Validasi Mutu — Lab QA/QC Demak",
       labImageAlt:
         "Insinyur kontrol kualitas PT Donlim Technology Indonesia menguji mesin kopi dan peralatan dapur elektrik di laboratorium QA/QC",
     },
+    solutions: {
+      eyebrow: "SOLUSI MANUFAKTUR TERPADU",
+      title: "Solusi Strategis untuk Merek Global & Ketahanan Rantai Pasok",
+      subtitle:
+        "Kami merancang skema kolaborasi manufaktur yang fleksibel — menjawab tantangan diversifikasi produksi, standar keselamatan internasional, hingga percepatan peluncuran produk baru.",
+      outcomesHeading: "Keunggulan Utama",
+      bannerTitle: "Butuh Skema Produksi Khusus untuk Merek Anda?",
+      bannerSubtitle:
+        "Tim engineering & B2B kami siap membantu pemetaan kapasitas lini, estimasi biaya manufaktur (DFM), dan jadwal audit fasilitas di JIPS Demak.",
+      bannerCta: "Diskusikan Solusi Anda",
+      items: [
+        {
+          id: "oem-odm-turnkey",
+          code: "SOL-01",
+          audience: "Merek & Ritel Global",
+          title: "Solusi Manufaktur OEM / ODM Turnkey",
+          description:
+            "Layanan produksi ujung-ke-ujung dari adaptasi desain industri (DFM) bersama tim R&D Donlim Group hingga pencetakan injeksi, perakitan massal, dan kemasan siap ritel.",
+          outcomes: [
+            "Dukungan industrialisasi desain & validasi pilot run",
+            "Fleksibilitas kustomisasi warna, material, & kemasan merek",
+            "Integrasi langsung cetakan plastik hingga produk jadi",
+          ],
+          highlightLabel: "Model Kolaborasi",
+          highlightValue: "OEM & ODM End-to-End",
+          ctaLabel: "Ajukan Skema OEM/ODM",
+          inquiryTopic: "b2b-oem",
+          icon: "layers",
+        },
+        {
+          id: "sea-supply-hub",
+          code: "SOL-02",
+          audience: "Diversifikasi Rantai Pasok",
+          title: "Solusi Basis Ekspor Asia Tenggara (Jawa Tengah)",
+          description:
+            "Mengoptimalkan daya saing ekspor merek global dengan memadukan komponen inti presisi dari ekosistem grup dan perakitan strategis dekat Pelabuhan Tanjung Emas Semarang.",
+          outcomes: [
+            "Ketahanan rantai pasok global berbasis manufaktur Indonesia",
+            "Akses koridor logistik pelabuhan ekspor FOB Semarang",
+            "Traceability lot produksi & manajemen gudang terintegrasi",
+          ],
+          highlightLabel: "Hub Ekspor",
+          highlightValue: "JIPS Demak · FOB Semarang",
+          ctaLabel: "Pelajari Skema Rantai Pasok",
+          inquiryTopic: "b2b-oem",
+          icon: "globe",
+        },
+        {
+          id: "global-compliance",
+          code: "SOL-03",
+          audience: "Kualitas & Kepatuhan",
+          title: "Solusi Rekayasa Keselamatan & Kepatuhan Pasar",
+          description:
+            "Menjamin kesiapan regulasi elektrik, material food-contact, dan uji daya tahan produk untuk memenuhi syarat distribusi ketat di Amerika Utara maupun Uni Eropa.",
+          outcomes: [
+            "Kesiapan varian tegangan 120V/60Hz (AS) & 220–240V/50Hz (EU)",
+            "100% uji keselamatan Hi-Pot & pengujian siklus di lab QA",
+            "Kesiapan audit mutu, K3/HSE, dan kepatuhan sosial pembeli",
+          ],
+          highlightLabel: "Verifikasi Mutu",
+          highlightValue: "4-Tahap IQC → OQC",
+          ctaLabel: "Jadwalkan Audit Kualitas",
+          inquiryTopic: "factory-audit",
+          icon: "shieldCheck",
+        },
+        {
+          id: "scalable-operations",
+          code: "SOL-04",
+          audience: "Skala & Kecepatan Pasar",
+          title: "Solusi Skalabilitas Kapasitas & Operasi Lokal",
+          description:
+            "Didukung 4.000+ tenaga kerja terlatih dan tim teknis dwibahasa Indonesia–Mandarin untuk mempercepat ramp-up produksi saat lonjakan permintaan musiman ritel global.",
+          outcomes: [
+            "Lini perakitan modular untuk pergantian model cepat",
+            "Komunikasi proyek presisi oleh tim teknis dwibahasa ID–中文",
+            "Sinergi pemasok kemasan & material lokal Jawa Tengah",
+          ],
+          highlightLabel: "Kapasitas SDM",
+          highlightValue: "4.000+ Tenaga Kerja Terlatih",
+          ctaLabel: "Konsultasikan Kapasitas",
+          inquiryTopic: "b2b-oem",
+          icon: "trendingUp",
+        },
+      ],
+    },
     capabilities: {
       eyebrow: "KAPABILITAS MANUFAKTUR",
-      title: "Proses Produksi Terintegrasi dari Cetakan Presisi hingga Kontainer Ekspor",
+      title:
+        "Proses Produksi Terintegrasi dari Cetakan Presisi hingga Kontainer Ekspor",
       subtitle:
         "Setiap lini di fasilitas JIPS Blok G-2 dirancang untuk volume produksi tinggi dengan konsistensi toleransi mekanis dan standar keselamatan elektrik internasional.",
       items: [
@@ -416,7 +536,8 @@ export const companyContent: Record<Locale, CompanyContent> = {
           summary:
             "Mesin espresso bertekanan 15–20 Bar dengan sistem pemanas thermoblock presisi, portafilter komersial, dan steam wand stainless steel untuk pasar ekspor.",
           image: "/image/product-espresso.jpg",
-          imageAlt: "Mesin espresso semi-otomatis stainless steel PT Donlim Technology Indonesia",
+          imageAlt:
+            "Mesin espresso semi-otomatis stainless steel PT Donlim Technology Indonesia",
           models: [
             "15–20 Bar Compact Pump Espresso",
             "Thermoblock Quick-Heat Espresso",
@@ -440,7 +561,8 @@ export const companyContent: Record<Locale, CompanyContent> = {
           summary:
             "Pembuat kopi tetes otomatis dan sistem kapsul single-serve dengan kontrol suhu penyeduhan stabil serta fitur auto shut-off hemat energi.",
           image: "/image/product-espresso.jpg",
-          imageAlt: "Sistem pembuat kopi tetes dan brewer otomatis OEM PT Donlim Technology Indonesia",
+          imageAlt:
+            "Sistem pembuat kopi tetes dan brewer otomatis OEM PT Donlim Technology Indonesia",
           imagePosition: "object-right",
           models: [
             "12-Cup Programmable Drip Coffee Maker",
@@ -465,7 +587,8 @@ export const companyContent: Record<Locale, CompanyContent> = {
           summary:
             "Air fryer konveksi udara panas berpresisi tinggi dengan panel kontrol sentuh LED, sensor suhu NTC akurat, dan keranjang food-contact bebas PFOA.",
           image: "/image/product-airfryer.jpg",
-          imageAlt: "Air fryer digital modern seri thermal cooking PT Donlim Technology Indonesia",
+          imageAlt:
+            "Air fryer digital modern seri thermal cooking PT Donlim Technology Indonesia",
           imagePosition: "object-left",
           models: [
             "Single-Basket Digital Air Fryer (4L–6L)",
@@ -490,7 +613,8 @@ export const companyContent: Record<Locale, CompanyContent> = {
           summary:
             "Oven meja multi-fungsi berbalut baja nirkarat dengan sirkulasi kipas konveksi merata, pengaturan suhu presisi, dan pintu kaca tempered tahan panas.",
           image: "/image/product-airfryer.jpg",
-          imageAlt: "Oven konveksi meja baja nirkarat PT Donlim Technology Indonesia",
+          imageAlt:
+            "Oven konveksi meja baja nirkarat PT Donlim Technology Indonesia",
           imagePosition: "object-right",
           models: [
             "Compact 18L–25L Countertop Oven",
@@ -515,7 +639,8 @@ export const companyContent: Record<Locale, CompanyContent> = {
           summary:
             "Pemanggang roti 2-slot dan 4-slot dengan mekanisme pemusatan otomatis, kontrol tingkat kematangan elektronik 6-level, dan fitur anti-jam.",
           image: "/image/product-toaster.jpg",
-          imageAlt: "Pemanggang roti 4-slot baja nirkarat PT Donlim Technology Indonesia",
+          imageAlt:
+            "Pemanggang roti 4-slot baja nirkarat PT Donlim Technology Indonesia",
           imagePosition: "object-left",
           models: [
             "2-Slice & 4-Slice Stainless Steel Toaster",
@@ -540,7 +665,8 @@ export const companyContent: Record<Locale, CompanyContent> = {
           summary:
             "Ketel listrik pour-over dan breakfast kettle dengan basis putar 360°, proteksi boil-dry, dan pengendali suhu elektronik untuk kopi serta teh.",
           image: "/image/product-toaster.jpg",
-          imageAlt: "Ketel listrik gooseneck presisi seri breakfast appliances PT Donlim Technology Indonesia",
+          imageAlt:
+            "Ketel listrik gooseneck presisi seri breakfast appliances PT Donlim Technology Indonesia",
           imagePosition: "object-right",
           models: [
             "Gooseneck Pour-Over Electric Kettle",
@@ -565,7 +691,8 @@ export const companyContent: Record<Locale, CompanyContent> = {
           summary:
             "Blender meja bermotor torsi tinggi dengan wadah kaca borosilikat tebal, sistem pisau baja nirkarat presisi, dan penguncian interlock ganda.",
           image: "/image/product-blender.jpg",
-          imageAlt: "Blender kaca borosilikat torsi tinggi PT Donlim Technology Indonesia",
+          imageAlt:
+            "Blender kaca borosilikat torsi tinggi PT Donlim Technology Indonesia",
           imagePosition: "object-left",
           models: [
             "1.5L Borosilicate Glass Countertop Blender",
@@ -590,7 +717,8 @@ export const companyContent: Record<Locale, CompanyContent> = {
           summary:
             "Pengolah makanan serbaguna dengan peredam getaran optimal, mangkuk bebas BPA berkapasitas besar, dan kelengkapan cakram potong multi-fungsi.",
           image: "/image/product-blender.jpg",
-          imageAlt: "Pengolah makanan kompak multi-pisau PT Donlim Technology Indonesia",
+          imageAlt:
+            "Pengolah makanan kompak multi-pisau PT Donlim Technology Indonesia",
           imagePosition: "object-right",
           models: [
             "Compact 1.2L–2.0L Food Processor",
@@ -678,7 +806,8 @@ export const companyContent: Record<Locale, CompanyContent> = {
         {
           region: "Asia-Pasifik & Regional",
           share: "Ekspansi Strategis",
-          focus: "Jaringan distribusi regional memanfaatkan hub logistik Indonesia",
+          focus:
+            "Jaringan distribusi regional memanfaatkan hub logistik Indonesia",
         },
       ],
       hseTitle: "Komitmen SDM & Harmoni Lintas Budaya",
@@ -688,19 +817,22 @@ export const companyContent: Record<Locale, CompanyContent> = {
       faqs: [
         {
           id: "faq-1",
-          question: "Apakah PT Donlim Technology Indonesia menerima kerja sama OEM dan ODM?",
+          question:
+            "Apakah PT Donlim Technology Indonesia menerima kerja sama OEM dan ODM?",
           answer:
             "Ya. Sebagai bagian dari ekosistem Donlim Group (Guangdong Xinbao Holdings), fasilitas kami di Demak melayani manufaktur OEM maupun kolaborasi ODM bersama tim R&D grup untuk merek internasional berorientasi ekspor.",
         },
         {
           id: "faq-2",
-          question: "Di mana lokasi persis pabrik PT Donlim Technology Indonesia?",
+          question:
+            "Di mana lokasi persis pabrik PT Donlim Technology Indonesia?",
           answer:
             "Pabrik kami berlokasi di Jatengland Industrial Park Sayung (JIPS), Blok G-2, Desa Batu, Kecamatan Karangtengah, Kabupaten Demak, Jawa Tengah — terhubung langsung dengan jalur logistik Semarang dan Pelabuhan Tanjung Emas.",
         },
         {
           id: "faq-3",
-          question: "Bagaimana proses rekrutmen untuk tenaga kerja lokal di Demak dan sekitarnya?",
+          question:
+            "Bagaimana proses rekrutmen untuk tenaga kerja lokal di Demak dan sekitarnya?",
           answer:
             "Rekrutmen terbuka secara berkala untuk posisi Operator Produksi, Quality Control (QC), Warehouse & Logistik, Teknik/Engineering, HSE, dan Staf Administrasi melalui kanal resmi HR perusahaan serta mitra bursa kerja daerah tanpa pungutan biaya apa pun.",
         },
@@ -807,7 +939,10 @@ export const companyContent: Record<Locale, CompanyContent> = {
         phonePlaceholder: "+62 812-xxxx-xxxx",
         topic: "Kategori Keperluan",
         topics: [
-          { value: "b2b-oem", label: "Kemitraan Manufaktur OEM / ODM Global" },
+          {
+            value: "b2b-oem",
+            label: "Kemitraan Manufaktur OEM / ODM Global",
+          },
           { value: "factory-audit", label: "Jadwal Kunjungan & Audit Pabrik" },
           { value: "supplier", label: "Registrasi Supplier / Vendor Lokal" },
           { value: "careers", label: "Informasi Karier & Rekrutmen HR" },
@@ -822,7 +957,8 @@ export const companyContent: Record<Locale, CompanyContent> = {
       validation: {
         nameRequired: "Mohon isi nama lengkap Anda.",
         emailInvalid: "Mohon masukkan alamat email yang valid.",
-        messageMin: "Mohon tuliskan pesan minimal 15 karakter agar tim kami dapat membantu.",
+        messageMin:
+          "Mohon tuliskan pesan minimal 15 karakter agar tim kami dapat membantu.",
       },
       successTitle: "Inquiry Anda Telah Tercatat",
       successMessage:
@@ -845,654 +981,740 @@ export const companyContent: Record<Locale, CompanyContent> = {
         "QA/QC & Safety Testing Lab",
       ],
       copyright: "PT Donlim Technology Indonesia. Hak cipta dilindungi.",
-      complianceNote: "Jatengland Industrial Park Sayung (JIPS) Blok G-2 · Demak, Jawa Tengah",
+      complianceNote:
+        "Jatengland Industrial Park Sayung (JIPS) Blok G-2 · Demak, Jawa Tengah",
     },
   },
 
-  en: {
-    skipToContent: "Skip to main content",
+  zh: {
+    skipToContent: "跳转到主要内容",
     nav: {
       items: [
-        { label: "About", href: "#about" },
-        { label: "Capabilities", href: "#capabilities" },
-        { label: "Products", href: "#products" },
-        { label: "Quality & Export", href: "#quality" },
-        { label: "Partners & Careers", href: "#gateway" },
+        { label: "关于我们", href: "#about" },
+        { label: "解决方案", href: "#solutions" },
+        { label: "制造能力", href: "#capabilities" },
+        { label: "产品目录", href: "#products" },
+        { label: "品质与出口", href: "#quality" },
+        { label: "合作与招聘", href: "#gateway" },
       ],
-      cta: "Contact Us",
-      mobileTitle: "PT Donlim Technology Indonesia",
-      mobileSubtitle: "Company Profile Navigation",
+      cta: "联系我们",
+      mobileTitle: "印尼东菱科技有限公司",
+      mobileSubtitle: "企业官网导航",
+      languageLabel: "切换印尼语或中文",
+      openMenuLabel: "打开导航菜单",
     },
     hero: {
-      carouselLabel: "PT Donlim Technology Indonesia main showcase",
-      prevLabel: "Previous slide",
-      nextLabel: "Next slide",
-      pauseLabel: "Pause carousel autoplay",
-      playLabel: "Play carousel autoplay",
-      goToSlidePrefix: "Go to slide",
+      carouselLabel: "印尼东菱科技有限公司主视觉轮播",
+      prevLabel: "上一张幻灯片",
+      nextLabel: "下一张幻灯片",
+      pauseLabel: "暂停自动轮播",
+      playLabel: "开始自动轮播",
+      goToSlidePrefix: "切换到第",
       slides: [
         {
           id: "precision-manufacturing",
-          tagline: "World-Class Precision Home Appliance",
-          taglineAccent: "Manufacturing",
+          tagline: "打造世界级精密小家电",
+          taglineAccent: "智能制造基地",
           image: "/image/hero-factory.jpg",
-          imageAlt:
-            "Modern automated small kitchen appliance assembly lines inside PT Donlim Technology Indonesia",
+          imageAlt: "印尼东菱科技有限公司现代化小家电自动化装配车间",
         },
         {
           id: "global-export-hub",
-          tagline: "From Central Java to",
-          taglineAccent: "Global Markets",
+          tagline: "立足印尼中爪哇，稳健链接",
+          taglineAccent: "全球出口市场",
           image: "/image/hero-export.jpg",
           imageAlt:
-            "Modern manufacturing campus and export hub of PT Donlim Technology Indonesia in JIPS Demak",
+            "位于中爪哇省淡目县 JIPS 工业园区的印尼东菱科技有限公司现代化制造园区",
         },
         {
           id: "engineered-living",
-          tagline: "Engineered Innovation for",
-          taglineAccent: "Modern Living",
+          tagline: "以精工智造赋能",
+          taglineAccent: "全球现代品质生活",
           image: "/image/hero-craft.jpg",
-          imageAlt:
-            "Refined collection of precision modern kitchen appliances engineered for global brands",
+          imageAlt: "面向全球品牌打造的现代化精密厨房小家电产品系列",
         },
       ],
     },
     metrics: [
       {
         value: "4,000+",
-        label: "Local Workforce",
-        detail: "Supported by ~200 international engineering & management specialists",
+        label: "印尼本土员工",
+        detail: "由约 200 名资深工程技术与管理专家团队协同引领",
         icon: "users",
       },
       {
-        value: "30+ Yrs",
-        label: "Donlim Group Heritage",
-        detail: "Backed by Guangdong Xinbao Electrical Appliances Holdings",
+        value: "30+ 年",
+        label: "东菱集团底蕴",
+        detail: "依托广东新宝电器股份有限公司三十余年全球制造积淀",
         icon: "factory",
       },
       {
         value: "100%",
-        label: "Export-Oriented Output",
-        detail: "Supplying global distribution channels in North America & Europe",
+        label: "外向型出口基地",
+        detail: "稳定供应北美、欧洲等国际主流品牌与零售渠道",
         icon: "globe",
       },
       {
         value: "JIPS G-2",
-        label: "Central Java Hub",
-        detail: "Strategic Semarang–Demak industrial corridor with port access",
+        label: "中爪哇制造枢纽",
+        detail: "坐落于三宝垄—淡目工业走廊，便捷直连国际海运港口",
         icon: "mapPin",
       },
     ],
     about: {
-      eyebrow: "ABOUT THE COMPANY",
-      title: "Connecting Global Manufacturing Scale with Indonesian Industrial Talent",
-      lead: "Established in 2023 in Demak, Central Java, PT Donlim Technology Indonesia serves as the strategic Southeast Asian manufacturing base of Guangdong Xinbao Electrical Appliances Holdings Co., Ltd. (Donlim Group).",
+      eyebrow: "关于公司",
+      title: "融合全球精工供应链与印尼本土制造动能",
+      lead: "印尼东菱科技有限公司（PT Donlim Technology Indonesia）成立于 2023 年，位于印度尼西亚中爪哇省淡目县，是广东新宝电器股份有限公司（东菱集团 / Donlim Group）在东南亚布局的战略级制造基地。",
       paragraphs: [
-        "We combine core precision components sourced from the group's established supply ecosystem — such as heating elements and electric motors — with local plastic injection molding, standardized high-volume assembly, comprehensive electrical safety testing, and export-ready packaging.",
-        "Beyond production scale, PT Donlim Technology Indonesia invests in structured technical transfer, strict occupational health and safety (HSE) standards, and active partnerships with regional universities in Central Java to nurture cross-cultural leadership.",
+        "工厂高效协同集团核心部件生态（包括核心发热元件与高性能电机），并在中爪哇园区内完整实现精密注塑成型、标准化规模装配、全流程安规性能检测及出口级成品包装。",
+        "除规模化制造外，印尼东菱科技有限公司始终坚持长期技术转移、严格落实 EHS 职业健康安全体系，并积极携手印尼中爪哇高校及语言文化机构，深化跨文化团队融合与本土产业人才培养。",
       ],
-      parentLabel: "GLOBAL PARENT GROUP",
-      parentName: "Guangdong Xinbao Electrical Appliances Holdings Co., Ltd.",
+      parentLabel: "全球母公司集团",
+      parentName: "广东新宝电器股份有限公司（东菱集团 / Donlim Group）",
       parentMeta:
-        "One of the world's foremost ODM/OEM small home appliance manufacturers with over three decades of engineering leadership.",
-      visionTitle: "Corporate Vision",
+        "全球领先的小家电 ODM/OEM 制造企业之一，深耕厨房与家居小家电研发制造三十余载。",
+      visionTitle: "企业愿景",
       visionText:
-        "To become Southeast Asia's most dependable, precision-driven, and export-competitive small home appliance manufacturing hub.",
-      missionTitle: "Operational Mission",
+        "成为东南亚地区最值得信赖、兼具精密品质与全球出口竞争力的标杆小家电制造中心。",
+      missionTitle: "运营使命",
       missionText:
-        "Delivering international-grade product quality, supply chain resilience, on-time global fulfillment, and sustainable career growth for local communities.",
+        "以国际标准品质、稳健供应链交付、精益运营效率，与客户及印尼本土团队共创可持续价值。",
       milestones: [
         {
           year: "1995+",
-          title: "Donlim / Xinbao Foundation",
-          detail: "Building global leadership in small kitchen appliance ODM/OEM.",
+          title: "新宝 / 东菱集团奠基",
+          detail: "确立全球西式小家电 ODM/OEM 领军地位与完整研发体系。",
         },
         {
           year: "2023",
-          title: "PT Donlim Technology Indonesia Founded",
-          detail: "Strategic expansion into Jatengland Industrial Park Sayung, Demak.",
+          title: "印尼东菱科技有限公司成立",
+          detail: "战略落户中爪哇省淡目县 Jatengland 工业园（JIPS）G-2 区。",
         },
         {
-          year: "2024–Now",
-          title: "Large-Scale Export Operations",
-          detail: "Employing 4,000+ personnel shipping directly to North America & Europe.",
+          year: "2024–至今",
+          title: "规模投产与稳定全球交付",
+          detail: "团队规模突破 4,000 人，持续向北美及欧洲市场大批量出货。",
         },
       ],
-      labCaption: "Electrical Safety & Endurance Verification — Demak QA/QC Lab",
+      labCaption: "电气安规与整机性能验证 — 淡目工厂 QA/QC 测试实验室",
       labImageAlt:
-        "PT Donlim Technology Indonesia quality control engineers inspecting espresso machines and electric appliances inside a modern testing lab",
+        "印尼东菱科技有限公司质量控制工程师在现代化检测实验室对意式咖啡机与厨房电器进行安规测试",
+    },
+    solutions: {
+      eyebrow: "综合制造解决方案",
+      title: "面向全球品牌与韧性供应链的一站式制造方案",
+      subtitle:
+        "针对国际品牌客户的全球产能布局、严苛市场准入法规及旺季弹性交付需求，提供成熟落地的东南亚制造解决方案。",
+      outcomesHeading: "核心交付价值",
+      bannerTitle: "为您的品牌定制专属印尼制造方案？",
+      bannerSubtitle:
+        "我们的双语工程与商务团队随时支持产能评估、DFM 制造可行性分析及淡目工厂实地验厂安排。",
+      bannerCta: "预约方案沟通",
+      items: [
+        {
+          id: "oem-odm-turnkey",
+          code: "SOL-01",
+          audience: "国际品牌与零售商",
+          title: "全流程 OEM / ODM 交钥匙制造方案",
+          description:
+            "协同集团研发中心开展工业设计与可制造性优化（DFM），在印尼基地一站式完成模具注塑、规模装配与零售成品包装交付。",
+          outcomes: [
+            "涵盖工程导入（NPI）与规范试产（Pilot Run）验证",
+            "灵活支持外观材质、配色及零售彩盒定制",
+            "注塑件自制直连整机装配，严控交期与成本",
+          ],
+          highlightLabel: "合作模式",
+          highlightValue: "OEM / ODM 一站式交付",
+          ctaLabel: "咨询 OEM/ODM 方案",
+          inquiryTopic: "b2b-oem",
+          icon: "layers",
+        },
+        {
+          id: "sea-supply-hub",
+          code: "SOL-02",
+          audience: "全球供应链布局",
+          title: "东南亚出口枢纽与韧性供应链方案",
+          description:
+            "充分发挥集团核心电机与发热部件配套优势，叠加中爪哇省淡目基地与三宝垄丹戎马斯港的区位便利，助力客户优化全球供应链韧性。",
+          outcomes: [
+            "成熟落地的东南亚（印尼）出口制造产能配置",
+            "紧邻三宝垄港口物流走廊，高效响应 FOB 出运",
+            "全链路批次追溯与现代化出口仓储集装箱管理",
+          ],
+          highlightLabel: "出口枢纽",
+          highlightValue: "JIPS 淡目 · 三宝垄港出运",
+          ctaLabel: "了解供应链布局",
+          inquiryTopic: "b2b-oem",
+          icon: "globe",
+        },
+        {
+          id: "global-compliance",
+          code: "SOL-03",
+          audience: "品质与合规保障",
+          title: "欧美安规认证与全流程品控方案",
+          description:
+            "围绕北美与欧盟严苛的电气安全、食品接触材料与能效要求，通过实验室全项测试与产线全检机制确保每一批产品合规交付。",
+          outcomes: [
+            "全面兼容北美 120V/60Hz 与欧洲 220–240V/50Hz 标准",
+            "产线 100% 高压绝缘（Hi-Pot）与寿命老化测试",
+            "完备承接国际大客户质量体系、EHS 及社会责任验厂",
+          ],
+          highlightLabel: "质量防线",
+          highlightValue: "四阶管控 IQC → OQC",
+          ctaLabel: "预约验厂与品控评审",
+          inquiryTopic: "factory-audit",
+          icon: "shieldCheck",
+        },
+        {
+          id: "scalable-operations",
+          code: "SOL-04",
+          audience: "弹性产能与本地协同",
+          title: "规模化产线弹性与中印尼双语交付方案",
+          description:
+            "依托 4,000+ 训练有素的本土产业工人与中印尼双语技术管理团队，高效承接国际零售旺季订单爬坡与多机型柔性切换。",
+          outcomes: [
+            "模块化精益装配线，支持多品类快速换线生产",
+            "中印尼双语工程与项目团队，确保技术沟通零偏差",
+            "深度联动中爪哇本地包材与物流供应商生态",
+          ],
+          highlightLabel: "团队规模",
+          highlightValue: "4,000+ 成熟产业团队",
+          ctaLabel: "对接产能与排期",
+          inquiryTopic: "b2b-oem",
+          icon: "trendingUp",
+        },
+      ],
     },
     capabilities: {
-      eyebrow: "MANUFACTURING CAPABILITIES",
-      title: "Integrated Production from Precision Molding to Export Container",
+      eyebrow: "核心制造能力",
+      title: "从精密注塑到整柜出口的一体化制造体系",
       subtitle:
-        "Every line inside our JIPS Block G-2 plant is engineered for repeatable high-volume output, tight mechanical tolerances, and full international safety compliance.",
+        "JIPS G-2 园区每一条产线均围绕大批量稳定输出、严苛尺寸公差及国际电气安规标准进行系统化部署。",
       items: [
         {
           id: "molding",
           code: "CAP-01",
-          title: "Precision Plastic Injection Molding",
+          title: "精密塑料注塑成型",
           description:
-            "High-speed automated injection molding lines with precision temperature control, export-certified food-contact and heat-resistant polymers, and dedicated in-house mold maintenance.",
+            "配备高速自动化注塑机与精准温控系统，选用符合出口标准的食品接触级及耐高温阻燃材料，并具备厂内精密模具维保能力。",
           highlights: [
-            "Export-compliant food-grade & flame-retardant resins",
-            "Tight dimensional tolerances & repeatable finish quality",
-            "Direct inline feed into sub-assembly stations",
+            "出口合规食品接触级及耐高温环保树脂",
+            "严控结构尺寸公差与高质感外观一致性",
+            "注塑成品高效直供下游组件与整机装配线",
           ],
           icon: "cpu",
           featured: true,
           image: "/image/molding-facility.jpg",
-          imageAlt:
-            "Automated precision plastic injection molding machines inside PT Donlim Technology Indonesia plant",
+          imageAlt: "印尼东菱科技有限公司现代化高速自动化精密注塑成型车间",
         },
         {
           id: "assembly",
           code: "CAP-02",
-          title: "High-Volume Automated Assembly",
+          title: "规模化精益整机装配",
           description:
-            "Modular assembly lines engineered for fast model changeovers across espresso machines, air fryers, ovens, toasters, and blenders.",
+            "模块化装配线支持意式咖啡机、空气炸锅、烤箱、多士炉与搅拌机等多品类大批量稳定生产与高效换型。",
           highlights: [
-            "Lean line balancing & standardized torque control",
-            "Structured inline electrical sub-assembly verification",
+            "精益工位节拍平衡与标准化作业流程",
+            "数字化扭力校准与在线电气组件检验",
           ],
           icon: "cog",
         },
         {
           id: "qa-testing",
           code: "CAP-03",
-          title: "Safety & Endurance Testing Lab",
+          title: "安规与寿命测试实验室",
           description:
-            "Comprehensive thermal endurance, dielectric strength (Hi-Pot), leakage current, and lifecycle stress tests aligned with North American and European standards.",
+            "针对北美与欧洲法规开展耐高温、高压耐压（Hi-Pot）、泄漏电流及长周期寿命耐久性测试，严守产品安全底线。",
           highlights: [
-            "100% inline electrical safety testing",
-            "Long-cycle durability & thermal runaway validation",
+            "100% 产线在线电气安规全检",
+            "整机寿命循环与温升异常保护验证",
           ],
           icon: "shieldCheck",
         },
         {
           id: "supply-chain",
           code: "CAP-04",
-          title: "Global Supply Chain & Export Logistics",
+          title: "全球供应链与出口物流",
           description:
-            "Seamless integration of group-manufactured core motors and heating elements with retail-ready packaging and rapid corridor access to Tanjung Emas Port, Semarang.",
+            "高效联动集团核心电机与发热体配套，结合出口彩盒包装、托盘化集装及临近三宝垄丹戎马斯港的区位优势。",
           highlights: [
-            "Direct gateway to international maritime shipping",
-            "Lot-level warehouse inventory & batch traceability",
+            "快捷衔接国际海运干线港口",
+            "规范化出口仓储与批次条码追溯",
           ],
           icon: "packageCheck",
         },
         {
           id: "odm-engineering",
           code: "CAP-05",
-          title: "OEM / ODM Engineering Transfer",
+          title: "OEM / ODM 工程技术转移",
           description:
-            "Cross-border engineering teams supporting DFM optimization, regional voltage adaptations, and structured pilot production runs.",
+            "跨国工程师团队全程支持新品工业化导入、可制造性优化（DFM）及不同目标市场电压与插头规格定制。",
           highlights: [
-            "120V/60Hz (North America) & 220–240V/50Hz (Europe) ready",
-            "Controlled pilot runs before mass production scale-up",
+            "覆盖北美 120V/60Hz 与欧洲 220–240V/50Hz 规格",
+            "量产前全流程 Pilot Run 试产签核验证",
           ],
           icon: "wrench",
         },
       ],
     },
     products: {
-      eyebrow: "OEM / ODM PRODUCT CATALOG",
-      title: "Explore Our Product Catalog",
+      eyebrow: "OEM / ODM 产品目录",
+      title: "探索我们的产品目录",
       subtitle:
-        "Find the small home appliance platforms that match your OEM/ODM requirements. Use the category filters below or browse all available product groups.",
-      viewProductLabel: "View product",
-      showingLabel: "products available",
-      modelsHeading: "Production Scope",
-      specsHeading: "Manufacturing Parameters",
-      marketsHeading: "Primary Export Markets",
-      ctaLabel: "Request OEM Spec & Quotation",
+        "查找契合您品牌 OEM/ODM 规划的小家电产品平台。点击下方品类筛选，或直接浏览全部量产系列。",
+      viewProductLabel: "查看产品",
+      showingLabel: "款可选产品系列",
+      modelsHeading: "量产机型覆盖",
+      specsHeading: "核心制造参数",
+      marketsHeading: "主要出口市场",
+      ctaLabel: "获取 OEM 规格书与报价",
       categories: [
-        { id: "all", label: "All Products", icon: "grid" },
-        { id: "coffee", label: "Coffee & Espresso", icon: "coffee" },
-        { id: "airfryer", label: "Air Fryers & Ovens", icon: "flame" },
-        { id: "toaster", label: "Toasters & Kettles", icon: "zap" },
-        { id: "blender", label: "Blenders & Food Prep", icon: "utensils" },
+        { id: "all", label: "全部产品", icon: "grid" },
+        { id: "coffee", label: "咖啡机系列", icon: "coffee" },
+        { id: "airfryer", label: "空炸与烤箱", icon: "flame" },
+        { id: "toaster", label: "多士炉与水壶", icon: "zap" },
+        { id: "blender", label: "搅拌与料理机", icon: "utensils" },
       ],
       items: [
         {
           id: "espresso-20bar",
           categoryId: "coffee",
-          subcategory: "Beverage Systems",
+          subcategory: "咖啡饮品系列",
           code: "CAT-01 · ESPRESSO",
-          name: "Semi-Automatic Pump Espresso",
+          name: "半自动泵压意式咖啡机",
           summary:
-            "15–20 Bar pump espresso platforms engineered with precision thermoblock heating, commercial-style portafilters, and brushed stainless steel steam wands.",
+            "15–20 Bar 高压泵压萃取平台，搭载快速温控加热块（Thermoblock）、商业级手柄及不锈钢蒸汽打奶棒，面向欧美主流市场。",
           image: "/image/product-espresso.jpg",
-          imageAlt: "Brushed stainless steel semi-automatic espresso machine",
+          imageAlt: "不锈钢半自动意式咖啡机",
           models: [
-            "15–20 Bar Compact Pump Espresso",
-            "Thermoblock Quick-Heat Espresso",
-            "Integrated Pressure Gauge Series",
-            "Steam Wand & Frothing Sub-Assembly",
+            "15–20 Bar 紧凑型泵压意式机",
+            "Thermoblock 快速预热意式系列",
+            "可视化压力表专业款",
+            "高压蒸汽打奶与热水组件",
           ],
           specs: [
-            { label: "Heating System", value: "Thermoblock / Boiler" },
-            { label: "Housing Finish", value: "Brushed SS & Heat-Safe ABS" },
-            { label: "Voltage Options", value: "120V/60Hz · 220–240V/50Hz" },
-            { label: "Mandatory QA", value: "Hi-Pot, Pressure & Leak Test" },
+            { label: "加热系统", value: "Thermoblock / 锅炉" },
+            { label: "机身材质", value: "拉丝不锈钢 / 耐热 ABS" },
+            { label: "出口电压", value: "120V/60Hz · 220–240V/50Hz" },
+            { label: "必检项目", value: "耐压、压力与防漏全检" },
           ],
-          exportMarkets: ["North America", "Western Europe", "United Kingdom"],
+          exportMarkets: ["北美", "西欧", "英国"],
         },
         {
           id: "drip-coffee-pro",
           categoryId: "coffee",
-          subcategory: "Beverage Systems",
+          subcategory: "咖啡饮品系列",
           code: "CAT-01 · BREWER",
-          name: "Programmable Drip & Pod Brewer",
+          name: "智能预约滴漏与胶囊咖啡机",
           summary:
-            "Programmable drip brewers and single-serve capsule systems engineered for brew temperature precision and automated energy-saving shut-off.",
+            "稳定控温滴漏式咖啡机与单杯胶囊萃取机型，具备精准冲泡水温控制、防滴漏阀设计及节能自动断电功能。",
           image: "/image/product-espresso.jpg",
-          imageAlt: "Programmable drip coffee maker and single-serve brewer",
+          imageAlt: "智能滴漏与单杯胶囊咖啡机",
           imagePosition: "object-right",
           models: [
-            "12-Cup Programmable Drip Coffee Maker",
-            "Single-Serve Capsule & Pod Brewer",
-            "Thermal Carafe Brew Station",
-            "Anti-Drip Valve & Keep-Warm Plate",
+            "12 杯智能预约滴漏咖啡机",
+            "单杯胶囊 / 粉盒两用咖啡机",
+            "不锈钢保温壶萃取工作站",
+            "防滴漏阀与恒温保温盘方案",
           ],
           specs: [
-            { label: "Capacity", value: "Single-Serve to 1.8L" },
-            { label: "Control Module", value: "Digital LCD / Mechanical" },
-            { label: "Voltage Options", value: "120V/60Hz · 220–240V/50Hz" },
-            { label: "Mandatory QA", value: "Brew Temp & Endurance QA" },
+            { label: "容量范围", value: "单杯至 1.8L" },
+            { label: "控制方式", value: "数字 LCD / 机械按键" },
+            { label: "出口电压", value: "120V/60Hz · 220–240V/50Hz" },
+            { label: "必检项目", value: "萃取温控与寿命验证" },
           ],
-          exportMarkets: ["North America", "Europe", "Asia-Pacific"],
+          exportMarkets: ["北美", "欧洲", "亚太"],
         },
         {
           id: "digital-airfryer",
           categoryId: "airfryer",
-          subcategory: "Thermal Cooking",
+          subcategory: "热风烹饪系列",
           code: "CAT-02 · AIR FRYER",
-          name: "Digital Rapid-Air Fryer Series",
+          name: "数显高速热风空气炸锅",
           summary:
-            "High-efficiency convection air fryers with capacitive LED controls, accurate NTC temperature sensing, and PFOA-free certified food-contact baskets.",
+            "高效立体热风循环空气炸锅平台，配备 LED 触控面板、高精度 NTC 温控传感器及符合欧美标准的无 PFOA 食品级不粘炸篮。",
           image: "/image/product-airfryer.jpg",
-          imageAlt: "Modern digital countertop air fryer series",
+          imageAlt: "现代数显台式空气炸锅系列",
           imagePosition: "object-left",
           models: [
-            "Single-Basket Digital Air Fryer (4L–6L)",
-            "Dual-Zone Sync Air Fryer (8L–9L)",
-            "Viewing-Window Smart Air Fryer",
-            "Non-Stick Food-Contact Basket System",
+            "单篮数显空气炸锅（4L–6L）",
+            "双篮同步智控空气炸锅（8L–9L）",
+            "可视窗智能空气炸锅",
+            "食品接触级不粘炸篮组件",
           ],
           specs: [
-            { label: "Power Range", value: "1,400W – 1,800W" },
-            { label: "Thermal Control", value: "Digital PCB & NTC Sensor" },
-            { label: "Material Safety", value: "Food-Contact Compliant" },
-            { label: "Mandatory QA", value: "Thermal Cutoff & Airflow QA" },
+            { label: "功率范围", value: "1,400W – 1,800W" },
+            { label: "温控模块", value: "数字 PCB + NTC 传感" },
+            { label: "材料合规", value: "欧美食品接触级认证" },
+            { label: "必检项目", value: "过温保护与风道检验" },
           ],
-          exportMarkets: ["North America", "European Union", "Australia"],
+          exportMarkets: ["北美", "欧盟", "澳大利亚"],
         },
         {
           id: "convection-oven",
           categoryId: "airfryer",
-          subcategory: "Thermal Cooking",
+          subcategory: "热风烹饪系列",
           code: "CAT-02 · OVEN",
-          name: "Countertop Air-Fryer Convection Oven",
+          name: "多功能热风空炸台式烤箱",
           summary:
-            "Multi-function stainless steel countertop ovens featuring uniform convection airflow, precise digital temperature controls, and tempered glass doors.",
+            "拉丝不锈钢多功能台式烤箱，融合高速热风空炸与均匀烘烤功能，采用钢化耐热玻璃视窗与精准电子控温设计。",
           image: "/image/product-airfryer.jpg",
-          imageAlt: "Stainless steel countertop convection oven",
+          imageAlt: "拉丝不锈钢多功能台式热风烤箱",
           imagePosition: "object-right",
           models: [
-            "Compact 18L–25L Countertop Oven",
-            "Air-Fryer Toaster Oven Combo",
-            "Multi-Preset Digital Baking Oven",
-            "Dual-Element Quartz/SS Heating System",
+            "18L–25L 紧凑型台式烤箱",
+            "空气炸锅电烤箱一体机",
+            "多菜单数显烘焙烤箱",
+            "上下双发热管热风循环系统",
           ],
           specs: [
-            { label: "Power Range", value: "1,500W – 1,800W" },
-            { label: "Cavity Material", value: "Aluminized / Stainless Steel" },
-            { label: "Protection", value: "Double-Layer Thermal Safety" },
-            { label: "Mandatory QA", value: "Surface Temp & Hi-Pot Test" },
+            { label: "功率范围", value: "1,500W – 1,800W" },
+            { label: "内胆材质", value: "镀铝板 / 不锈钢腔体" },
+            { label: "安全防护", value: "双重温控隔热保护" },
+            { label: "必检项目", value: "表温测试与耐压全检" },
           ],
-          exportMarkets: ["North America", "European Union", "Global OEM"],
+          exportMarkets: ["北美", "欧盟", "全球 OEM"],
         },
         {
           id: "ss-toaster-4slice",
           categoryId: "toaster",
-          subcategory: "Breakfast Appliances",
+          subcategory: "西式早餐系列",
           code: "CAT-03 · TOASTER",
-          name: "Brushed Stainless 4-Slice Toaster",
+          name: "拉丝不锈钢四片多士炉",
           summary:
-            "2-slice and 4-slice designer toasters featuring self-centering bread carriages, 6-stage electronic browning control, and anti-jam auto shut-off.",
+            "2 片及 4 片宽槽多士炉，支持自动居中烘烤、6 档电子焦度控制、防卡死自动断电保护及抗指纹拉丝金属机身。",
           image: "/image/product-toaster.jpg",
-          imageAlt: "4-slice brushed stainless steel designer toaster",
+          imageAlt: "四片拉丝不锈钢宽槽多士炉",
           imagePosition: "object-left",
           models: [
-            "2-Slice & 4-Slice Stainless Steel Toaster",
-            "Wide-Slot Bagel & Defrost Control",
-            "Dual Independent Control Panel",
-            "Removable Stainless Crumb Tray",
+            "2 片 / 4 片不锈钢多士炉",
+            "宽槽贝果与解冻模式机型",
+            "双区独立控温四片款",
+            "抽拉式不锈钢碎屑盘结构",
           ],
           specs: [
-            { label: "Surface Finish", value: "Brushed SS / Matte Coated" },
-            { label: "Safety Features", value: "Auto Shut-Off & Anti-Jam" },
-            { label: "Line Capacity", value: "High-Speed Continuous Line" },
-            { label: "Mandatory QA", value: "Browning Uniformity & Safety" },
+            { label: "表面工艺", value: "拉丝不锈钢 / 哑光喷涂" },
+            { label: "安全设计", value: "防卡死与自动断电" },
+            { label: "产线能力", value: "高速连续化装配产线" },
+            { label: "必检项目", value: "烘烤均匀度与安规全检" },
           ],
-          exportMarkets: ["Europe", "North America", "United Kingdom"],
+          exportMarkets: ["欧洲", "北美", "英国"],
         },
         {
           id: "precision-kettle",
           categoryId: "toaster",
-          subcategory: "Breakfast Appliances",
+          subcategory: "西式早餐系列",
           code: "CAT-03 · KETTLE",
-          name: "Precision Gooseneck Electric Kettle",
+          name: "精密控温细嘴手冲电水壶",
           summary:
-            "Pour-over gooseneck and countertop breakfast kettles built with 360° cordless bases, boil-dry protection, and precision variable temperature control.",
+            "手冲细嘴壶与现代早餐电水壶系列，配置 360° 无线旋转底座、防干烧保护及精准恒温控制系统，适配咖啡与茶饮冲泡。",
           image: "/image/product-toaster.jpg",
-          imageAlt: "Precision gooseneck electric kettle in matte slate finish",
+          imageAlt: "哑光灰细嘴手冲控温电水壶",
           imagePosition: "object-right",
           models: [
-            "Gooseneck Pour-Over Electric Kettle",
-            "Variable-Temperature Digital Kettle",
-            "Double-Wall Cool-Touch Kettle",
-            "Coordinated Countertop Breakfast Set",
+            "细嘴手冲控温电水壶",
+            "多段电子调温数显水壶",
+            "双层防烫保温电水壶",
+            "成套西式早餐外观系列",
           ],
           specs: [
-            { label: "Capacity", value: "0.8L – 1.7L Food-Grade SS" },
-            { label: "Protection", value: "Boil-Dry & Auto Cut-Off" },
-            { label: "Power Base", value: "360° Cordless Swivel Base" },
-            { label: "Mandatory QA", value: "Lifecycle Boil & Leak Test" },
+            { label: "容量规格", value: "0.8L – 1.7L 食品级不锈钢" },
+            { label: "安全防护", value: "防干烧与沸腾自动断电" },
+            { label: "底座结构", value: "360° 无线分离底座" },
+            { label: "必检项目", value: "干烧寿命与防渗漏测试" },
           ],
-          exportMarkets: ["Europe", "United Kingdom", "Nordics", "North America"],
+          exportMarkets: ["欧洲", "英国", "北欧", "北美"],
         },
         {
           id: "glass-blender",
           categoryId: "blender",
-          subcategory: "Motorized Prep",
+          subcategory: "动力料理系列",
           code: "CAT-04 · BLENDER",
-          name: "High-Torque Borosilicate Blender",
+          name: "高扭矩高硼硅玻璃搅拌机",
           summary:
-            "High-torque countertop blenders featuring thick borosilicate glass pitchers, precision-balanced stainless blades, and dual safety interlocks.",
+            "搭载集团高扭矩精密电机与加厚高硼硅玻璃杯，配合精钢多叶刀组与双重安全联锁开关，兼具强劲破壁力与低噪运行体验。",
           image: "/image/product-blender.jpg",
-          imageAlt: "High-torque borosilicate glass countertop blender",
+          imageAlt: "高硼硅玻璃杯高扭矩台式搅拌机",
           imagePosition: "object-left",
           models: [
-            "1.5L Borosilicate Glass Countertop Blender",
-            "Tritan BPA-Free High-Speed Blender",
-            "Personal Smoothie & Nutrient Extractor",
-            "Pulse & Variable-Speed Rotary Control",
+            "1.5L 高硼硅玻璃台式搅拌机",
+            "Tritan 无双酚 A 高速搅拌机",
+            "便携随行果蔬料理杯",
+            "无级旋钮与点动脉冲款",
           ],
           specs: [
-            { label: "Motor Unit", value: "High-Torque Group Motor" },
-            { label: "Vessel Material", value: "Borosilicate Glass / Tritan" },
-            { label: "Protection", value: "Thermal Overload & Interlock" },
-            { label: "Mandatory QA", value: "Noise, Vibration & Load Test" },
+            { label: "核心电机", value: "集团自研高扭矩电机" },
+            { label: "杯体材质", value: "高硼硅玻璃 / Tritan" },
+            { label: "安全保护", value: "过热保护与安全联锁" },
+            { label: "必检项目", value: "噪音、动平衡与负载测试" },
           ],
-          exportMarkets: ["North America", "Europe", "Latin America"],
+          exportMarkets: ["北美", "欧洲", "拉美"],
         },
         {
           id: "food-processor",
           categoryId: "blender",
-          subcategory: "Motorized Prep",
+          subcategory: "动力料理系列",
           code: "CAT-04 · FOOD PREP",
-          name: "Compact Multi-Blade Food Processor",
+          name: "多功能精钢刀盘食物料理机",
           summary:
-            "Versatile motorized food processors engineered with vibration-damped housings, BPA-free work bowls, and multi-function stainless slicing discs.",
+            "紧凑型多刀盘食物处理机，具备优良减震降噪结构、无 BPA 抗冲击料理碗及切片切丝多套精钢刀盘配置。",
           image: "/image/product-blender.jpg",
-          imageAlt: "Compact stainless steel multi-blade food processor",
+          imageAlt: "紧凑型多刀盘不锈钢食物料理机",
           imagePosition: "object-right",
           models: [
-            "Compact 1.2L–2.0L Food Processor",
-            "Multi-Disc Slicing & Shredding Kit",
-            "Safety Dual-Lock Lid Mechanism",
-            "Variable-Speed Hand Mixer & Chopper",
+            "1.2L–2.0L 多功能料理机",
+            "多刀盘切片 / 切丝 / 绞肉套装",
+            "双卡扣安全联锁杯盖结构",
+            "多档位手持搅拌与切碎系列",
           ],
           specs: [
-            { label: "Motor Unit", value: "Precision Copper-Wound Motor" },
-            { label: "Bowl Material", value: "Impact-Resistant BPA-Free" },
-            { label: "Protection", value: "Dual Safety Interlock Switch" },
-            { label: "Mandatory QA", value: "Endurance Torque & Safety QA" },
+            { label: "核心电机", value: "精密铜线动力电机" },
+            { label: "碗体材质", value: "抗冲击无 BPA 食品级" },
+            { label: "安全防护", value: "双安全联锁微动开关" },
+            { label: "必检项目", value: "扭矩耐久与整机安规检" },
           ],
-          exportMarkets: ["North America", "Europe", "Asia"],
+          exportMarkets: ["北美", "欧洲", "亚洲"],
         },
       ],
     },
     quality: {
-      eyebrow: "QUALITY, HSE & EXPORT REACH",
-      title: "Uncompromising Quality Discipline Across Every Production Stage",
+      eyebrow: "品质管理、EHS 与全球出口",
+      title: "贯穿每一道制造工序的严苛质量纪律",
       subtitle:
-        "Export credibility is engineered through layered quality verification — from incoming materials to pre-shipment audits — reinforced by disciplined workplace safety (HSE).",
-      pipelineTitle: "4-Stage Quality Verification Pipeline",
+        "国际出口信誉源自层层把关的品质验证体系——从原料入库到出货抽检全流程闭环管控，并与高标准 EHS 职业健康安全文化深度融合。",
+      pipelineTitle: "四阶品质闭环管控流程",
       stages: [
         {
           code: "01 · IQC",
-          title: "Incoming Quality Control",
+          title: "来料品质检验",
           description:
-            "Dimensional, electrical, and resin material verification on every incoming lot of motors, heating elements, and raw polymers.",
+            "对每一批次塑胶粒子、电机、发热管及电子元器件进行尺寸、电气性能与环保材料核验，杜绝不良原料流入产线。",
         },
         {
           code: "02 · IPQC",
-          title: "In-Process Quality Control",
+          title: "制程巡检管控",
           description:
-            "Real-time molding parameter checks, sub-assembly verification, and critical-to-quality checkpoints along every assembly line.",
+            "实时监控注塑工艺参数、半成品功能测试及装配线关键质量控制点（CTQ），及时预警并消除过程偏差。",
         },
         {
           code: "03 · FQC",
-          title: "Final Quality & Safety Test",
+          title: "成品 100% 安规全检",
           description:
-            "100% end-of-line dielectric Hi-Pot, earth continuity, leakage current, cosmetic inspection, and functional performance testing.",
+            "对每一台下线整机实施高压耐压（Hi-Pot）、接地电阻、泄漏电流、外观细节及核心功能 100% 全面检验。",
         },
         {
           code: "04 · OQC",
-          title: "Outgoing & Drop-Test Audit",
+          title: "出货抽检与跌落测试",
           description:
-            "International AQL sampling, packaging carton drop tests, and destination labeling checks prior to export container loading.",
+            "遵循国际 AQL 抽样标准，执行彩盒及外箱跌落测试与目的港法规标签核验，确保整柜安全交付。",
         },
       ],
-      standardsTitle: "Compliance Readiness & Governance",
+      standardsTitle: "合规体系与治理准备度",
       standards: [
         {
           code: "QMS",
-          title: "Structured Quality Management",
-          note: "Standardized operating procedures aligned with ISO 9001 principles and full batch traceability.",
+          title: "标准化质量管理体系",
+          note: "严格参照 ISO 9001 质量管理框架执行标准化作业与全批次可追溯管控。",
         },
         {
           code: "SAFETY",
-          title: "Global Regulatory Readiness",
-          note: "Product safety testing aligned with UL/ETL (North America) and CE/GS/RoHS (Europe) requirements.",
+          title: "国际市场法规准入能力",
+          note: "设计与测试全面对标北美 UL/ETL 及欧洲 CE/GS/RoHS 强制安全规范。",
         },
         {
-          code: "HSE / EHS",
-          title: "Health, Safety & Environment",
-          note: "Dedicated HSE engineering supervision, ergonomic stations, and routine safety compliance audits.",
+          code: "EHS / K3",
+          title: "职业健康、安全与环保",
+          note: "配置专职 EHS 工程管理团队、人机工程工位标准及常态化安全巡查。",
         },
         {
           code: "SOCIAL",
-          title: "Ethical Workforce Governance",
-          note: "Full compliance with Indonesian labor regulations and readiness for international buyer social audits.",
+          title: "合规用工与社会责任治理",
+          note: "全面遵守印尼劳工法规，具备承接国际零售商社会责任验厂的完备基础。",
         },
       ],
-      exportTitle: "Global Export Reach from Central Java",
+      exportTitle: "立足中爪哇的全球出口版图",
       exportRegions: [
         {
-          region: "North America",
-          share: "Core Market",
-          focus: "120V/60Hz appliance platforms serving US & Canadian retail brands",
+          region: "北美市场",
+          share: "核心主力",
+          focus: "120V/60Hz 产品平台，稳健服务美国与加拿大主流家电品牌及商超",
         },
         {
-          region: "Europe & UK",
-          share: "Core Market",
-          focus: "220–240V/50Hz compliance with RoHS & energy-efficiency standards",
+          region: "欧洲与英国",
+          share: "核心主力",
+          focus: "220–240V/50Hz 平台，满足 RoHS 环保与欧盟能效标准",
         },
         {
-          region: "Asia-Pacific & Regional",
-          share: "Strategic Growth",
-          focus: "Leveraging Indonesia's maritime corridor for regional fulfillment",
+          region: "亚太及区域市场",
+          share: "战略拓展",
+          focus: "依托印尼海运枢纽与东盟区位优势，高效辐射亚太市场",
         },
       ],
-      hseTitle: "Local Talent & Cross-Cultural Collaboration",
+      hseTitle: "本土人才培养与跨文化共融",
       hseText:
-        "We collaborate with universities and language centers across Central Java to advance bilingual technical training and seamless collaboration between expatriate specialists and 4,000+ local employees.",
-      faqTitle: "Frequently Asked Questions",
+        "公司长期携手印尼中爪哇高等院校与语言中心开展双语技能培训，促进外派技术专家与 4,000+ 印尼本土员工高效协同成长。",
+      faqTitle: "合作伙伴与求职常见问题",
       faqs: [
         {
           id: "faq-1",
-          question: "Does PT Donlim Technology Indonesia support both OEM and ODM partnerships?",
+          question: "印尼东菱科技有限公司是否承接 OEM 与 ODM 合作？",
           answer:
-            "Yes. Integrated within the Donlim Group (Guangdong Xinbao Holdings) network, our Demak facility supports OEM volume manufacturing as well as ODM programs backed by group R&D engineering for export markets.",
+            "是的。作为广东新宝电器股份有限公司（东菱集团）旗下核心海外基地，淡目工厂既承接大批量 OEM 制造，也可依托集团研发体系为出口品牌提供一体化 ODM 合作方案。",
         },
         {
           id: "faq-2",
-          question: "Where is the PT Donlim Technology Indonesia manufacturing facility located?",
+          question: "工厂具体位于印尼哪个工业园区？",
           answer:
-            "Our plant is located at Jatengland Industrial Park Sayung (JIPS), Block G-2, Batu Village, Karangtengah District, Demak Regency, Central Java — with direct logistics access to Semarang and Tanjung Emas Port.",
+            "工厂坐落于印度尼西亚中爪哇省淡目县 Karangtengah 区 Batu 村 Jatengland Industrial Park Sayung（JIPS）工业园 G-2 区，直连三宝垄干线与丹戎马斯国际港口。",
         },
         {
           id: "faq-3",
-          question: "How can local candidates apply for careers at the Demak facility?",
+          question: "中爪哇本地人才及双语专业人员如何应聘？",
           answer:
-            "We recruit regularly for Production Operators, QC Inspectors, Warehouse & Logistics, Technical/HSE Engineers, and Administrative/Bilingual roles through official HR channels and regional job centers at zero cost to applicants.",
+            "公司定期面向生产操作员、QC 质检员、仓储物流、生产工程/EHS 及中印尼双语行政管理岗位开放官方招聘，所有正规招聘渠道均不收取任何费用。",
         },
       ],
     },
     gateway: {
-      eyebrow: "ENTERPRISE GATEWAY",
-      title: "Select Your Pathway with PT Donlim Technology Indonesia",
+      eyebrow: "企业专属通道",
+      title: "选择您的专属业务对接通道",
       subtitle:
-        "Dedicated entry points ensure global OEM buyers, regional industrial vendors, and prospective employees connect directly with the right department.",
+        "通过分类对接入口，全球品牌采购商、印尼本土供应商与制造行业人才均可高效直达对应业务部门。",
       paths: [
         {
           id: "buyers",
-          badge: "B2B & OEM BUYERS",
-          title: "Global Brands & OEM Partners",
+          badge: "B2B 国际采购",
+          title: "全球品牌与 OEM 合作伙伴",
           description:
-            "Explore Southeast Asian manufacturing diversification, production capacity allocations, factory compliance audits, and OEM/ODM quotations.",
+            "对接东南亚产能规划、OEM/ODM 合作报价、工程打样以及淡目制造基地实地验厂安排。",
           bullets: [
-            "Schedule factory visits & compliance audits",
-            "Request product portfolio specs & engineering samples",
-            "Discuss MOQ, lead times, & FOB Semarang export terms",
+            "预约工厂实地考察与质量合规验厂",
+            "索取量产产品目录与技术参数表",
+            "沟通 MOQ、交期及三宝垄港 FOB 出口方案",
           ],
-          ctaLabel: "Contact B2B Sales Team",
+          ctaLabel: "联系 B2B 商务团队",
           inquiryTopic: "b2b-oem",
           icon: "handshake",
         },
         {
           id: "suppliers",
-          badge: "PROCUREMENT & VENDOR",
-          title: "Local Suppliers & Logistics Vendors",
+          badge: "采购与本土供应",
+          title: "印尼本地包材与物流供应商",
           description:
-            "Connect with our procurement team for export carton packaging, auxiliary materials, customs brokerage, container freight, and plant utilities.",
+            "诚邀中爪哇及周边优质出口纸箱彩盒厂、辅助材料商、报关行、海运货代及工业设备维保服务商合作。",
           bullets: [
-            "Submit vendor profile & quality certifications",
-            "Export packaging & maritime logistics partnerships",
-            "Industrial MRO & facility support services",
+            "提交供应商企业资质与质量认证文件",
+            "出口包装材料与集装箱海运物流合作",
+            "厂务设施维护与工业耗材配套供应",
           ],
-          ctaLabel: "Submit Vendor Inquiry",
+          ctaLabel: "提交供应商合作申请",
           inquiryTopic: "supplier",
           icon: "truck",
         },
         {
           id: "careers",
-          badge: "CAREERS · DEMAK",
-          title: "Manufacturing Talent & Careers",
+          badge: "人才招聘 · 淡目",
+          title: "制造精英与双语职业发展",
           description:
-            "Build your career alongside 4,000+ manufacturing professionals in a structured, safety-first facility with international technical exposure.",
+            "加入 4,000+ 现代化制造业团队，在规范安全、国际化技术氛围浓厚的平台中开启长期职业成长。",
           bullets: [
-            "Roles: Operators, QC Inspectors, Engineering & HSE",
-            "Warehouse, Export Logistics, & Bilingual Staff",
-            "Official, transparent, and zero-fee recruitment",
+            "热招：产线技工、QC 质检、生产工程与 EHS",
+            "仓储物流、出口关务及中印尼双语管理专员",
+            "官方公开招聘，全程零费用透明录用",
           ],
-          ctaLabel: "Inquire HR & Careers",
+          ctaLabel: "咨询人事招聘通道",
           inquiryTopic: "careers",
           icon: "briefcase",
         },
       ],
     },
     contact: {
-      eyebrow: "CONTACT & FACILITY LOCATION",
-      title: "Connect with PT Donlim Technology Indonesia",
+      eyebrow: "联系我们与工厂位置",
+      title: "联系印尼东菱科技有限公司团队",
       subtitle:
-        "Submit a B2B manufacturing inquiry, vendor registration, or corporate request. Our team responds on standard business days.",
-      plantTitle: "Manufacturing Facility & Operational Office",
+        "欢迎提交 B2B 制造合作、本土供应商入驻或企业综合咨询。我们的业务团队将在工作日内及时回复。",
+      plantTitle: "制造基地与运营办公地址",
       plantAddress: [
-        "PT Donlim Technology Indonesia",
-        "Jatengland Industrial Park Sayung (JIPS), Block G-2",
-        "Batu Village, Karangtengah District, Demak Regency",
-        "Central Java 59561, Indonesia",
+        "PT Donlim Technology Indonesia（印尼东菱科技有限公司）",
+        "Jatengland Industrial Park Sayung (JIPS), Blok G-2",
+        "Desa Batu, Kec. Karangtengah, Kab. Demak",
+        "Jawa Tengah 59561, Indonesia",
       ],
-      coordinates: "SEMARANG – DEMAK INDUSTRIAL CORRIDOR · JIPS BLOCK G-2",
-      hoursLabel: "Office Operating Hours",
-      hoursValue: "Monday – Friday, 08:00 – 17:00 WIB (UTC+7)",
-      departmentsTitle: "Department Channels",
+      coordinates: "三宝垄—淡目工业走廊 · JIPS 工业园 G-2 区",
+      hoursLabel: "办公营业时间",
+      hoursValue: "周一至周五，08:00 – 17:00（印尼西部时间 WIB / UTC+7）",
+      departmentsTitle: "各部门联系邮箱",
       departments: [
         {
-          role: "B2B Sales & OEM Partnership",
+          role: "B2B 商务与 OEM 合作",
           email: "business@donlim-indonesia.co.id",
-          note: "Export quotations, product specs, & factory audit scheduling",
+          note: "出口报价、产品规格书及工厂验厂预约",
         },
         {
-          role: "Procurement & Local Sourcing",
+          role: "供应链采购与本土配套",
           email: "procurement@donlim-indonesia.co.id",
-          note: "Packaging suppliers, auxiliary materials, & freight partners",
+          note: "包装材料、辅料及港口物流合作伙伴对接",
         },
         {
-          role: "Human Resources & Recruitment",
+          role: "人力资源与招聘部",
           email: "recruitment@donlim-indonesia.co.id",
-          note: "Official job inquiries & university partnerships",
+          note: "官方岗位咨询与高校校企合作",
         },
       ],
-      mapButton: "Open JIPS Demak Location in Google Maps",
-      formTitle: "Corporate Inquiry Form",
+      mapButton: "在 Google 地图查看 JIPS 淡目工厂位置",
+      formTitle: "企业在线咨询表单",
       formSubtitle:
-        "Complete the form below so your inquiry is routed directly to the relevant department.",
+        "请填写以下信息，您的需求将直接分派至对应职能部门处理。",
       fields: {
-        name: "Full Name",
-        namePlaceholder: "e.g. Sarah Wijaya",
-        company: "Company / Organization",
-        companyPlaceholder: "Your company or institution name",
-        email: "Business Email",
+        name: "您的姓名",
+        namePlaceholder: "例如：陈明 / Budi Santoso",
+        company: "公司 / 机构名称",
+        companyPlaceholder: "请输入您的公司或单位名称",
+        email: "商务邮箱",
         emailPlaceholder: "name@company.com",
-        phone: "Phone / WhatsApp",
-        phonePlaceholder: "+62 812-xxxx-xxxx",
-        topic: "Inquiry Category",
+        phone: "联系电话 / WhatsApp / 微信",
+        phonePlaceholder: "+62 812-xxxx-xxxx / +86 138-xxxx-xxxx",
+        topic: "咨询业务类别",
         topics: [
-          { value: "b2b-oem", label: "Global OEM / ODM Manufacturing Partnership" },
-          { value: "factory-audit", label: "Factory Visit & Compliance Audit" },
-          { value: "supplier", label: "Local Supplier / Vendor Registration" },
-          { value: "careers", label: "HR & Career Information" },
-          { value: "general", label: "General Corporate Inquiry" },
+          { value: "b2b-oem", label: "全球 OEM / ODM 制造合作" },
+          { value: "factory-audit", label: "工厂参观与合规验厂预约" },
+          { value: "supplier", label: "印尼本地供应商 / 物流商入驻" },
+          { value: "careers", label: "人事招聘与职业发展咨询" },
+          { value: "general", label: "企业综合事务咨询" },
         ],
-        message: "Message & Project Details",
+        message: "具体需求与留言内容",
         messagePlaceholder:
-          "Share your target product category, estimated volume, or inquiry details...",
-        submit: "Submit Corporate Inquiry",
-        submitting: "Submitting...",
+          "请简要说明目标产品品类、预估年产能需求或希望沟通的具体事项...",
+        submit: "提交企业咨询",
+        submitting: "正在提交...",
       },
       validation: {
-        nameRequired: "Please enter your full name.",
-        emailInvalid: "Please provide a valid email address.",
-        messageMin: "Please write at least 15 characters so our team can assist you properly.",
+        nameRequired: "请填写您的姓名。",
+        emailInvalid: "请输入有效的电子邮箱地址。",
+        messageMin: "请填写至少 15 个字符的需求说明，以便我们准确回复。",
       },
-      successTitle: "Inquiry Recorded Successfully",
+      successTitle: "您的咨询信息已成功登记",
       successMessage:
-        "Thank you for contacting PT Donlim Technology Indonesia. Your inquiry summary is ready for follow-up by the designated department on the next business day.",
-      successReset: "Send Another Inquiry",
+        "感谢联系印尼东菱科技有限公司。您的咨询摘要已记录，相关部门负责人将在下个工作日内与您取得联系。",
+      successReset: "继续发送新咨询",
     },
     footer: {
       tagline:
-        "Export-oriented small home appliance precision manufacturing hub in Central Java — delivering global standards powered by Indonesian talent.",
-      groupNote:
-        "A subsidiary of Guangdong Xinbao Electrical Appliances Holdings Co., Ltd. (Donlim Group).",
-      companyColTitle: "Company",
-      capabilitiesColTitle: "Lines & Capabilities",
-      locationColTitle: "Plant Location",
+        "立足印尼中爪哇的外向型小家电精密制造基地——以国际严苛品质标准与本土制造力量服务全球品牌。",
+      groupNote: "广东新宝电器股份有限公司（东菱集团 / Donlim Group）子公司。",
+      companyColTitle: "企业导航",
+      capabilitiesColTitle: "核心产线与能力",
+      locationColTitle: "工厂地址",
       capabilitiesLinks: [
-        "Plastic Injection Molding",
-        "Automated Assembly Lines",
-        "Coffee & Espresso Systems",
-        "Air Fryers & Kitchen Ovens",
-        "QA/QC & Safety Testing Lab",
+        "精密塑料注塑成型",
+        "自动化整机装配线",
+        "咖啡机与意式系统",
+        "空气炸锅与台式烤箱",
+        "QA/QC 安规测试实验室",
       ],
-      copyright: "PT Donlim Technology Indonesia. All rights reserved.",
-      complianceNote: "Jatengland Industrial Park Sayung (JIPS) Block G-2 · Demak, Central Java",
+      copyright: "PT Donlim Technology Indonesia（印尼东菱科技有限公司）版权所有。",
+      complianceNote:
+        "印尼中爪哇省淡目县 Jatengland 工业园（JIPS）G-2 区",
     },
   },
 };

@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/sections/site-header";
 import { HeroSection } from "@/components/sections/hero-section";
 import { MetricsStrip } from "@/components/sections/metrics-strip";
 import { AboutSection } from "@/components/sections/about-section";
+import { SolutionsSection } from "@/components/sections/solutions-section";
 import { CapabilitiesBento } from "@/components/sections/capabilities-bento";
 import { ProductsTabsSection } from "@/components/sections/products-tabs-section";
 import { QualityExportSection } from "@/components/sections/quality-export-section";
@@ -24,6 +25,7 @@ export function CompanyProfilePage() {
           <HeroSection />
           <MetricsStrip />
           <AboutSection />
+          <SolutionsSection onSelectInquiryTopic={setSelectedTopic} />
           <CapabilitiesBento />
           <ProductsTabsSection onSelectInquiryTopic={setSelectedTopic} />
           <QualityExportSection />

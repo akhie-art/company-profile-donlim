@@ -7,8 +7,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-source-sans-3), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-source-sans-3), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-lexend), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
   --color-surface-dark: var(--surface-dark);
   --color-surface-deep: var(--surface-deep);

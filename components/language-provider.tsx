@@ -15,8 +15,12 @@ const LanguageContext = React.createContext<LanguageContextValue | null>(null);
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocale] = React.useState<Locale>("id");
 
+  React.useEffect(() => {
+    document.documentElement.lang = locale === "zh" ? "zh-CN" : "id";
+  }, [locale]);
+
   const toggleLocale = React.useCallback(() => {
-    setLocale((prev) => (prev === "id" ? "en" : "id"));
+    setLocale((prev) => (prev === "id" ? "zh" : "id"));
   }, []);
 
   const value = React.useMemo(
